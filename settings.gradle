@@ -15,5 +15,5 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "NNC"
+rootProject.name = "CCN"
 include ':app'
