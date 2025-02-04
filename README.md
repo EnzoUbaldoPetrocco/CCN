@@ -1,2 +1,3 @@
 # CCN
-Android Application for Implementing Pepper Client 
+Application for Implementing Pepper Navigation
+ 
