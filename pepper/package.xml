@@ -20,6 +20,7 @@
 <exec_depend>rclpy</exec_depend>
 <exec_depend>std_msgs</exec_depend>
 <exec_depend>robot_interfaces</exec_depend>
+<exec_depend>urdf_launch</exec_depend>
 
 <buildtool_depend>rosidl_default_generators</buildtool_depend>
 <exec_depend>rosidl_default_runtime</exec_depend>
