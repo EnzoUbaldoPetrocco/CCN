@@ -7,3 +7,5 @@ Application for Implementing Pepper Navigation
 Pepper Robot repository [Github](https://github.com/ros-naoqi/pepper_robot), [Controlling Nao](https://wiki.ros.org/nao/Tutorials/Getting-Started#Controlling_NAO)
 
 Navigation algorithms: [GMAPPING](https://wiki.ros.org/gmapping), [AMCL](https://wiki.ros.org/amcl)
+
+[Pepper Navigation Repository](https://www.finnrietz.dev/linux/how-to-pepper-navigation/)
