@@ -83,7 +83,7 @@ class MainActivity:
 
         print("started")
         self.counter = 0
-        self.target_url = f"http://{SERVER_IP}:5000/predict"  # Flask server endpoint
+        self.target_url = f"http://{SERVER_IP}:5000/send_data"  # Flask server endpoint
         self.current_command = None
         self.prediction = 0.0
         self.ip = ip

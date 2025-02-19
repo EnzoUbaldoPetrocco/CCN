@@ -1,0 +1,71 @@
+# Use Ubuntu 22.04 as the base image
+FROM ubuntu:22.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive \
+    USER=root \
+    DISPLAY=:1
+
+# Update package lists
+RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
+    lsb-release \
+    sudo \
+    x11vnc \
+    xvfb \
+    xfce4 \
+    xfce4-terminal \
+    supervisor \
+    dbus-x11 \
+    tigervnc-standalone-server \
+    tigervnc-xorg-extension \
+    websockify \
+    xterm \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y \
+    novnc \
+    fluxbox \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y colord upower xfce4-settings xfce4-panel
+
+
+# Add ROS 2 sources and install ROS 2 Humble
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    && add-apt-repository universe \
+    && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | apt-key add - \
+    && echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/ros2.list \
+    && apt-get update && apt-get install -y \
+    ros-humble-desktop \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up ROS 2 environment
+RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+
+# Copy the entrypoint script to the container
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+#############################################
+############## NaoQi Libraries ##############
+#############################################
+ARG ROS_DISTRO=humble
+ENV ROS_DISTRO=${ROS_DISTRO}
+
+# install basic dependencies
+RUN apt-get update -y \
+  && apt-get install -y git python3-vcstool
+
+# install naoqi driver libraries
+RUN apt-get install -y ros-${ROS_DISTRO}-naoqi-libqi \
+  ros-${ROS_DISTRO}-naoqi-libqicore ros-${ROS_DISTRO}-naoqi-bridge-msgs \
+  ros-${ROS_DISTRO}-pepper-meshes \
+  ros-${ROS_DISTRO}-nao-meshes \
+  ros-${ROS_DISTRO}-naoqi-driver
+
+
+# Start the container with our script
+ENTRYPOINT ["/entrypoint.sh"]

@@ -1,0 +1,9 @@
+Docker container used in the context of robotic programming courses @ Unige
+
+https://hub.docker.com/r/carms84/noetic_ros2
+
+The image has been developed starting from a docker image providing HTML5 VNC interface to access ROS Noetic on Ubuntu 20.04 with the LXDE desktop environment.
+
+Run it by: docker run -it --name my_ros -p 6080:80 -p 5900:5900 carms84/noetic_ros2
+
+You may then open a browser and type http://127.0.0.1:6080/⁠ or use a VNC client (port 5900) to connect to the VNC server.

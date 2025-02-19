@@ -101,7 +101,7 @@ def move():
     print(f"Direction received: {direction}")
     return jsonify({"status": "Command received", "direction": current_command})
 
-@app.route('/predict', methods=['POST'])
+@app.route('/send_data', methods=['POST'])
 def predict():
     t_start = time.time()
     if 'image' not in request.files:
