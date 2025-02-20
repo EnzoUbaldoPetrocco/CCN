@@ -31,6 +31,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get update && apt-get install -y colord upower xfce4-settings xfce4-panel
 
+RUN apt-get install gedit -y
+
 
 # Add ROS 2 sources and install ROS 2 Humble
 RUN apt-get update && apt-get install -y \
@@ -39,8 +41,24 @@ RUN apt-get update && apt-get install -y \
     && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | apt-key add - \
     && echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/ros2.list \
     && apt-get update && apt-get install -y \
-    ros-humble-desktop \
-    && rm -rf /var/lib/apt/lists/*
+    ros-humble-desktop 
+
+RUN apt install ros-dev-tools -y
+RUN sudo apt install ros-dev-tools -y
+RUN apt install -y build-essential cmake git gnupg lsb-release wget 
+RUN    sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list' 
+RUN  wget http://packages.osrfoundation.org/gazebo.key -O - |  apt-key add - 
+RUN apt-get update 
+RUN git clone https://github.com/ignitionrobotics/ign-gazebo 
+RUN    apt -y install \
+    $(sort -u $(find . -iname 'packages-'`lsb_release -cs`'.apt' -o -iname 'packages.apt' | tr '\n' ' '))
+
+#RUN cd ign-gazebo
+#RUN mkdir build
+#RUN cd build
+#RUN cmake ../
+#RUN make
+
 
 # Set up ROS 2 environment
 RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
@@ -56,8 +74,7 @@ ARG ROS_DISTRO=humble
 ENV ROS_DISTRO=${ROS_DISTRO}
 
 # install basic dependencies
-RUN apt-get update -y \
-  && apt-get install -y git python3-vcstool
+RUN apt-get update -y && apt-get install -y git python3-vcstool
 
 # install naoqi driver libraries
 RUN apt-get install -y ros-${ROS_DISTRO}-naoqi-libqi \
@@ -65,6 +82,11 @@ RUN apt-get install -y ros-${ROS_DISTRO}-naoqi-libqi \
   ros-${ROS_DISTRO}-pepper-meshes \
   ros-${ROS_DISTRO}-nao-meshes \
   ros-${ROS_DISTRO}-naoqi-driver
+
+
+# If you want to communicate with this docker
+# you need to use the same id
+RUN echo "export ROS_DOMAIN_ID=42" >> ~/.bashrc
 
 
 # Start the container with our script
