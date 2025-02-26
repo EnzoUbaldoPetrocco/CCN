@@ -53,12 +53,6 @@ RUN git clone https://github.com/ignitionrobotics/ign-gazebo
 RUN    apt -y install \
     $(sort -u $(find . -iname 'packages-'`lsb_release -cs`'.apt' -o -iname 'packages.apt' | tr '\n' ' '))
 
-#RUN cd ign-gazebo
-#RUN mkdir build
-#RUN cd build
-#RUN cmake ../
-#RUN make
-
 
 # Set up ROS 2 environment
 RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
@@ -88,6 +82,19 @@ RUN apt-get install -y ros-${ROS_DISTRO}-naoqi-libqi \
 # you need to use the same id
 RUN echo "export ROS_DOMAIN_ID=42" >> ~/.bashrc
 
+
+
+RUN mkdir ros2_ws
+RUN cd ros2_ws
+RUN mkdir src
+RUN cd src
+
+
+#RUN git clone https://github.com/ros-naoqi/naoqi_driver2.git
+#RUN vcs import < naoqi_driver2/dependencies.repos
+#RUN cd ../
+#RUN colcon build --symlink-install
+#RUN cd
 
 # Start the container with our script
 ENTRYPOINT ["/entrypoint.sh"]
