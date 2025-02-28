@@ -98,3 +98,32 @@ self.angle_increment = radians(120.0 * 2.0) / 61.0  # Default value
             self.__dict__[var_name] = config[var_name]
         return config
 ```
+
+modify:
+```
+print("dist, px, py: " + str(dist) +
+                  " " + str(p[0])) + " " + str(p[1])
+```
+with:
+```
+print("dist, px, py: " + str(dist) +
+                  " " + str(p[0]) + " " + str(p[1]))
+```
+replace:
+```
+print("tmp_angle: " + str(degrees(tmp_angle))) + " deg"
+```
+with:
+```
+print("tmp_angle: " + str(degrees(tmp_angle)) + " deg")
+
+once compiled using catkin_make
+
+go to /catkin_ws/devel/lib/python3/dist-packages/pepper_gazebo_plugin/cfg and make sure that
+the name of the file is actually: IncrementConfig.py and that
+```
+from .IncrementConfig import *
+```
+is inside __init__.py, otherwise, add the line
+
+
