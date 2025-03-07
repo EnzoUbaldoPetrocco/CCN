@@ -1,0 +1,131 @@
+pepper_dcm:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Controllers ------------------------------------------------
+  HeadYaw_position_controller:
+    type: position_controllers/JointPositionController
+    joint: HeadYaw
+
+  HeadPitch_position_controller:
+    type: position_controllers/JointPositionController
+    joint: HeadPitch
+
+  LShoulderPitch_position_controller:
+    type: position_controllers/JointPositionController
+    joint: LShoulderPitch
+
+  LShoulderRoll_position_controller:
+    type: position_controllers/JointPositionController
+    joint: LShoulderRoll
+
+  LElbowYaw_position_controller:
+    type: position_controllers/JointPositionController
+    joint: LElbowYaw
+
+  LElbowRoll_position_controller:
+    type: position_controllers/JointPositionController
+    joint: LElbowRoll
+
+  LWristYaw_position_controller:
+    type: position_controllers/JointPositionController
+    joint: LWristYaw
+
+  LHand_position_controller:
+    type: position_controllers/JointPositionController
+    joint: LHand
+
+  RShoulderPitch_position_controller:
+    type: position_controllers/JointPositionController
+    joint: RShoulderPitch
+
+  RShoulderRoll_position_controller:
+    type: position_controllers/JointPositionController
+    joint: RShoulderRoll
+
+  RElbowYaw_position_controller:
+    type: position_controllers/JointPositionController
+    joint: RElbowYaw
+
+  RWristYaw_position_controller:
+    type: position_controllers/JointPositionController
+    joint: RWristYaw
+
+  RElbowRoll_position_controller:
+    type: position_controllers/JointPositionController
+    joint: RElbowRoll
+
+  RHand_position_controller:
+    type: position_controllers/JointPositionController
+    joint: RHand
+
+  HipRoll_position_controller:
+    type: position_controllers/JointPositionController
+    joint: HipRoll
+
+  HipPitch_position_controller:
+    type: position_controllers/JointPositionController
+    joint: HipPitch
+
+  KneePitch_position_controller:
+    type: position_controllers/JointPositionController
+    joint: KneePitch
+    
+  # Effort Controllers ---------------------------
+  #WheelFL_controller:
+  #  type: effort_controllers/JointEffortController
+  #  joint: WheelFL
+  #  pid : {p: 1000.0, i: 0.01, d: 10.0}
+  #WheelFR_controller:
+  #  type: effort_controllers/JointEffortController
+  #  joint: WheelFR
+  #  pid : {p: 1000.0, i: 0.01, d: 10.0}
+  #WheelB_controller:
+  #  type: effort_controllers/JointEffortController
+  #  joint: WheelB
+  #  pid : {p: 1000.0, i: 0.01, d: 10.0}
+
+  WheelFL_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: WheelFL
+
+  WheelFR_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: WheelFR
+
+  WheelB_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: WheelB
+
+gazebo_ros_control:
+  pid_gains:
+    # Add default PID gains for all your joints
+    WheelFL: {p: 1000.0, i: 0.01, d: 10.0}
+    WheelFR: {p: 1000.0, i: 0.01, d: 10.0}
+    WheelB: {p: 1000.0, i: 0.01, d: 10.0}
+    HeadYaw: {p: 100000.0, i: 0.01, d: 10.0}
+    HeadPitch: {p: 100000.0, i: 0.01, d: 10.0}
+    LShoulderPitch: {p: 1000.0, i: 0.01, d: 10.0}
+    LShoulderRoll: {p: 1000.0, i: 0.01, d: 10.0}
+    LElbowYaw: {p: 1000.0, i: 0.01, d: 10.0}
+    LElbowRoll: {p: 1000.0, i: 0.01, d: 10.0}
+    LWristYaw: {p: 1000.0, i: 0.01, d: 10.0}
+    RShoulderPitch: {p: 1000.0, i: 0.01, d: 10.0}
+    RShoulderRoll: {p: 1000.0, i: 0.01, d: 10.0}
+    RElbowYaw: {p: 1000.0, i: 0.01, d: 10.0}
+    RElbowRoll: {p: 1000.0, i: 0.01, d: 10.0}
+    RWristYaw: {p: 1000.0, i: 0.01, d: 10.0}
+    HipRoll: {p: 100000.0, i: 0.01, d: 10.0}
+    HipPitch: {p: 100000.0, i: 0.01, d: 10.0}
+    KneePitch: {p: 100000.0, i: 0.01, d: 10.0}
+
+diff_drive_controller:
+  type: diff_drive_controller/DiffDriveController
+  publishOdomTF: true
+  odometrySource: /odom_diffdriver  # Set this to the correct odometry topic name
+  wheel_fl: WheelFL
+  wheel_fr: WheelFR
+  wheel_bl: WheelB
+  wheel_br: WheelB

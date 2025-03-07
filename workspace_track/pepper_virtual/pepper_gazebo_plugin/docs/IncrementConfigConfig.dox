@@ -1,0 +1,7 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~angle_increment" : \b [double] Angle increment min: 0.1, default: 0.05, max: inf
+- \b "~half_max_angle" : \b [double] Half maximum angle min: 115.0, default: 120.0, max: 145.0
+

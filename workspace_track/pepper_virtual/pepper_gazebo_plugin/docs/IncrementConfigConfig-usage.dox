@@ -1,0 +1,8 @@
+\subsubsection usage Usage
+\verbatim
+<node name="pepper_gazebo_plugin" pkg="pepper_gazebo_plugin" type="pepper_gazebo_plugin">
+  <param name="angle_increment" type="double" value="0.05" />
+  <param name="half_max_angle" type="double" value="120.0" />
+</node>
+\endverbatim
+
