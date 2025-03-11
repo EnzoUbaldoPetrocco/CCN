@@ -87,6 +87,9 @@ gazebo_ros_control:
     HipPitch: {p: 100000.0, i: 0.01, d: 10.0}
     KneePitch: {p: 100000.0, i: 0.01, d: 10.0}
 
+    LHand: {p: 100.0, i: 0.01, d: 10.0}
+    RHand: {p: 100.0, i: 0.01, d: 10.0}
+
 
 
 # gazebo_ros_control:

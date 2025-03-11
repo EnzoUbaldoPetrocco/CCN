@@ -4,6 +4,13 @@
   <!-- Load the URDF Model -->
   <include file="$(find pepper_description)/launch/display.launch" />  
 
+  <!--rosrun  gmapping slam_gmapping scan:=/pepper/laser _odom_fram:=/odom-->
+  <!--node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" args="-scan /pepper/laser -_odom_fram /odom" /-->
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+        <remap from="scan" to="/pepper/laser"/>
+        <param name="odom_frame" value="/odom"/>
+    </node>
+
   <env name="GAZEBO_MODEL_PATH" value="$(find pepper_gazebo_plugin)/models:$(optenv GAZEBO_MODEL_PATH)"/>
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -15,12 +22,12 @@
 
 
   <!-- Call Pepper Robot Trajectory Controller -->
-
+<!--
   <include file="$(find pepper_control)/launch/pepper_control_trajectory.launch" unless="$(arg launch_control_trajectory_all)"/>
   <include file="$(find pepper_control)/launch/pepper_control_trajectory_all.launch" if="$(arg launch_control_trajectory_all)"/>
-<!--
-  <include file="$(find pepper_control)/launch/pepper_control_position.launch"/>
 -->
+  <include file="$(find pepper_control)/launch/pepper_control_position.launch"/>
+
 
   <!--node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /-->  
   <!-- Spawn a robot into Gazebo -->

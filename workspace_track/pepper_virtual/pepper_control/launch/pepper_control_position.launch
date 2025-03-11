@@ -4,17 +4,39 @@
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find pepper_control)/config/pepper_position_control.yaml" command="load"/>
 
+
   <!-- load the controllers -->
   <node name="pepper_control" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" args="
-      /pepper_dcm/HeadYaw_position_controller /pepper_dcm/HeadPitch_position_controller
-      /pepper_dcm/LShoulderPitch_position_controller /pepper_dcm/LShoulderRoll_position_controller
-      /pepper_dcm/LElbowYaw_position_controller /pepper_dcm/LElbowRoll_position_controller /pepper_dcm/LWristYaw_position_controller
-      /pepper_dcm/RShoulderPitch_position_controller /pepper_dcm/RShoulderRoll_position_controller 
-      /pepper_dcm/RElbowYaw_position_controller /pepper_dcm/RElbowRoll_position_controller /pepper_dcm/RWristYaw_position_controller 
-      /pepper_dcm/LHand_position_controller /pepper_dcm/RHand_position_controller      
-      /pepper_dcm/HipRoll_position_controller /pepper_dcm/HipPitch_position_controller /pepper_dcm/KneePitch_position_controller 
-      /pepper_dcm/joint_state_controller"/>
+      /pepper/HeadYaw_position_controller /pepper/HeadPitch_position_controller
+      /pepper/LShoulderPitch_position_controller /pepper/LShoulderRoll_position_controller
+      /pepper/LElbowYaw_position_controller /pepper/LElbowRoll_position_controller /pepper/LWristYaw_position_controller
+      /pepper/RShoulderPitch_position_controller /pepper/RShoulderRoll_position_controller 
+      /pepper/RElbowYaw_position_controller /pepper/RElbowRoll_position_controller /pepper/RWristYaw_position_controller    
+      /pepper/HipRoll_position_controller /pepper/LHand_position_controller /pepper/KneePitch_position_controller 
+      /pepper/joint_state_controller
+      /pepper/WheelB_controller /pepper/WheelFL_controller /pepper/WheelFR_controller"/>
+
+
+  <node pkg="rostopic" type="rostopic" name="init1" args="pub -1 /HeadYaw_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init2" args="pub -1 /HeadPitch_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init3" args="pub -1 /LShoulderPitch_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init4" args="pub -1 /LShoulderRoll_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init5" args="pub -1 /LElbowYaw_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init6" args="pub -1 /LElbowRoll_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init7" args="pub -1 /LWristYaw_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init8" args="pub -1 /RShoulderPitch_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init9" args="pub -1 /RElbowRoll_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init10" args="pub -1 /RWristYaw_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init11" args="pub -1 /LHand_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init12" args="pub -1 /LHand_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init13" args="pub -1 /LShoulderRoll_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init14" args="pub -1 /KneePitch_position_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init15" args="pub -1 /WheelB_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init16" args="pub -1 /WheelFL_controller/command std_msgs/Float64 0.0"/>
+  <node pkg="rostopic" type="rostopic" name="init17" args="pub -1 /WheelFR_controller/command std_msgs/Float64 0.0"/>
 </launch>
 
-<!-- /pepper_dcm/WheelB_controller /pepper_dcm/WheelFL_controller /pepper_dcm/WheelFR_controller -->
+
+
+<!-- /pepper/WheelB_controller /pepper/WheelFL_controller /pepper/WheelFR_controller -->

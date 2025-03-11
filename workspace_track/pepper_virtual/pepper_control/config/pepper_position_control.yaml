@@ -1,4 +1,6 @@
-pepper_dcm:
+pepper:
+  
+
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController
@@ -121,6 +123,9 @@ gazebo_ros_control:
     HipPitch: {p: 100000.0, i: 0.01, d: 10.0}
     KneePitch: {p: 100000.0, i: 0.01, d: 10.0}
 
+    LHand: {p: 100.0, i: 0.01, d: 10.0}
+    RHand: {p: 100.0, i: 0.01, d: 10.0}
+
 diff_drive_controller:
   type: diff_drive_controller/DiffDriveController
   publishOdomTF: true
@@ -129,3 +134,6 @@ diff_drive_controller:
   wheel_fr: WheelFR
   wheel_bl: WheelB
   wheel_br: WheelB
+
+
+
