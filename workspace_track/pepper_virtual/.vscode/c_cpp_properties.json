@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/root/ros_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/root/ros_ws/src/m-explore/explore/include/**",
+        "/root/ros_ws/src/SLAM_packages/hector_slam/hector_map_tools/include/**",
+        "/root/ros_ws/src/SLAM_packages/hector_slam/hector_mapping/include/**",
+        "/root/ros_ws/src/SLAM_packages/hector_slam/hector_marker_drawing/include/**",
+        "/root/ros_ws/src/SLAM_packages/navigation_2d/nav2d_exploration/include/**",
+        "/root/ros_ws/src/SLAM_packages/navigation_2d/nav2d_karto/include/**",
+        "/root/ros_ws/src/SLAM_packages/navigation_2d/nav2d_localizer/include/**",
+        "/root/ros_ws/src/SLAM_packages/navigation_2d/nav2d_navigator/include/**",
+        "/root/ros_ws/src/SLAM_packages/navigation_2d/nav2d_operator/include/**",
+        "/root/ros_ws/src/SLAM_packages/octomap_ros/include/**",
+        "/root/ros_ws/src/SLAM_packages/octomap_mapping/octomap_server/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
