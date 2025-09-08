@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".menu.MenuActivity">
+
+
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="73dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/close_content_description"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/navigation_tint_selector" />
+
+    <RadioButton
+        android:id="@+id/createMapButton"
+        style="@style/RadioButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="140dp"
+        android:text="@string/create_new_map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/closeButton"
+        app:layout_constraintBottom_toTopOf="@id/useMapButton" />
+
+    <RadioButton
+        android:id="@+id/useMapButton"
+        style="@style/RadioButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="140dp"
+        android:text="@string/use_saved_map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/createMapButton"
+        app:layout_constraintBottom_toTopOf="@id/serverUrlEditText" />
+
+    <EditText
+        android:id="@+id/serverUrlEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter server URL"
+        android:inputType="textUri"
+        app:layout_constraintTop_toBottomOf="@+id/useMapButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        />
+
+    <Button
+        android:id="@+id/saveUrlButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save URL"
+        app:layout_constraintTop_toBottomOf="@id/serverUrlEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <!--RadioButton
+        android:id="@+id/bruteServicesButton"
+        style="@style/RadioButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="140dp"
+        android:text="@string/brute_services"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/useMapButton"
+        app:layout_constraintBottom_toBottomOf="parent" /-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

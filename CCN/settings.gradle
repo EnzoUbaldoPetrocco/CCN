@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri("http://android.aldebaran.com/sdk/maven")
+            setAllowInsecureProtocol(true)
+        }
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+    }
+}
+rootProject.name = "CCN"
+include ':app'

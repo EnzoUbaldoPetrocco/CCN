@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">CCN_Proxemics</string>
+
+    <!-- Introduction -->
+    <string name="intro_speech">Welcome.</string>
+
+    <!-- Menu -->
+    <string name="create_new_map">Create a new map</string>
+    <string name="use_saved_map">Use saved map</string>
+    <string name="brute_services">Test Services Available</string>
+    <string name="menu_sentence_no_map">We can create a new map and we will be able to use it later.</string>
+    <string name="menu_sentence_with_map">Do you want to create a new map or to use a previously saved map?</string>
+
+    <!-- Mapping -->
+    <string name="mapping_mapping_text">Mapping in progress…</string>
+    <string name="mapping_saving_map_text">Saving map…</string>
+    <string name="mapping_advices_speech">I will now map my environment. Please be sure to be at least at 3 meters away from me while I scan the place.</string>
+    <string name="mapping_saving_map_speech">I will now save the map.</string>
+    <string name="mapping_success_speech">Perfect! I\'ve created a map. But we are not done! Because this is a sample, you need now to ask me to localize myself. Let\'s go back to the main menu and continue the procedure with the localization.</string>
+    <string name="mapping_title">Map creation</string>
+
+    <!-- Localization menu -->
+    <string name="localization_menu_title">Use saved map</string>
+    <string name="localize_yourself">Localize yourself</string>
+    <string name="go_to_initial_position">Go to your initial position</string>
+    <string name="go_to_goal">Go to Goal Prox</string>
+    <string name="go_to_goal_baseline">Go to Goal B</string>
+    <string name="go_to_goal_foreknowledge">Go to Goal F</string>
+    <string name="go_to_goal_adaptation">Go to Goal A</string>
+    <string name="localization_menu_sentence_not_localized">I can localize myself and go to my initial position later.</string>
+    <string name="localization_menu_sentence_localized">Based on the map you already saved, do you want me to localize myself or to go to my initial position?</string>
+
+    <!-- Localize -->
+    <string name="localize_title">Localization</string>
+    <string name="localize_loading_map_text">Loading map…</string>
+    <string name="localize_localizing_text">Localization in progress…</string>
+    <string name="localize_advices_speech">Please be sure to be at least at 3 meters away from me while I check if I\'m at the right place.</string>
+    <string name="localize_success_speech">OK, I know where I am.</string>
+
+
+    <!-- Go to goal -->
+    <string name="go_to_goal_title">Perform navigation task position</string>
+    <string name="go_to_goal_success_speech">Awesome! I\'m in my goal position!</string>
+    <string name="go_to_goal_briefing_text">Move to the starting point</string>
+    <string name="go_to_origin_moving_text">Moving</string>
+
+
+    <!-- Culture Menu -->
+    <string name="culture_title">Choose the Culture</string>
+    <string name="it">IT</string>
+    <string name="de">DE</string>
+
+
+    <!-- Content descriptions -->
+    <string name="background_content_description">Background image</string>
+    <string name="close_content_description">Close button</string>
+    <string name="back_content_description">Back button</string>
+    <string name="warning_content_description">Warning image</string>
+    <string name="success_content_description">Success image</string>
+
+    <!--Lottie file-->
+    <string name="progress_animation_file">lottie/splashy_loader.json</string>
+
+    <!-- Common -->
+    <string name="start">Start</string>
+    <string name="briefing_text">Make sure my back hatch is closed</string>
+    <string name="advices_text">Please stay away from me until I\'m done!</string>
+    <string name="error_text">Something is wrong</string>
+    <string name="success_text">Successfully done</string>
+    <string name="briefing_speech">Make sure I am not charging so I can move. Please double check if my back hatch is closed then press start.</string>
+    <string name="countdown_speech">5, 4, 3, 2, 1.</string>
+    <string name="error_speech">Oops, something went wrong. Please check if there is nothing around me avoiding me to turn and scan, then try again.</string>
+    <string name="serverUrl">"http://10.3.24.105:5000</string>
+    <string name="arrived_at_goal">Arrived at the goal</string>
+    <string name="arrived_at_start">Arrived at start</string>
+    <string name="returning_to_start">I am returning to the starting point</string>
+    <string name="go">Go</string>
+
+    <!-- Presentations -->
+    <string name="presentation_en">Hello, I am Pepper. I will be moving around the room. Talk to me, but please stay where you are.</string>
+    <string name="presentation_it">Ciao, sono Pepper. Mi muoverò nella stanza. Parla con me, ma per favore rimani dove sei.</string>
+    <string name="presentation_de">Hallo, ich bin Pepper. Ich bewege mich im Raum. Sprich mit mir, aber bitte bleib, wo du bist..</string>
+
+</resources>

@@ -1,0 +1,20 @@
+package com.example.ccn.localization;
+
+/**
+ * An event for screens.
+ */
+public enum ScreenEvent {
+    FOCUS_GAINED,
+    FOCUS_LOST,
+    BACK,
+    LOCALIZE_SELECTED,
+    GO_TO_GOAL_SELECTED,
+    GO_TO_GOAL_BASELINE_SELECTED,
+    GO_TO_GOAL_FOREKNOWLEDGE_SELECTED,
+    GO_TO_GOAL_ADAPTATION_SELECTED,
+    LOCALIZE_END,
+    GO_TO_GOAL_END,
+    GO_TO_GOAL_BASELINE_END,
+    GO_TO_GOAL_FOREKNOWLEDGE_END,
+    GO_TO_GOAL_ADAPTATION_END,
+}

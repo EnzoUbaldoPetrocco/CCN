@@ -1,0 +1,82 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.ccn"
+        minSdk 23
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'             // OK for compileSdk 32
+    implementation 'androidx.appcompat:appcompat:1.4.2'         // Downgraded from 1.7.0
+    implementation 'com.google.android.material:material:1.6.1' // Downgraded from 1.12.0
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03'
+// Recommended stable version for compileSdk 32
+
+    // Test Dependencies - Already compatible
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.microsoft.cognitiveservices.speech:client-sdk:1.26.0")
+
+    implementation('com.aldebaran:qisdk:1.7.5') {
+        exclude group: 'com.android.support'
+        // You might need to add specific modules if the above is too broad
+        // e.g., exclude group: 'com.android.support', module: 'support-compat'
+        // But 'com.android.support' is usually sufficient for common cases.
+    }
+    implementation('com.aldebaran:qisdk-design:1.7.5') {
+        exclude group: 'com.android.support'
+    }
+    //implementation 'com.aldebaran:qisdk-localization:1.0.2' // ✅ Correct line
+
+    // RxJava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+
+
+    // Fields & methods binding
+    // app-level build.gradle
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+
+
+    // After Effects animations
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+
+
+    // Crashlytics
+    //implementation('com.crashlytics.sdk.android:crashlytics:17.0.0@aar') { transitive = true }
+}
