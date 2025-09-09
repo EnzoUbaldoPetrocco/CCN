@@ -176,6 +176,29 @@ def analyze_data_by_group(df, threshold=0.8, user_id_col="Participant ID", group
             "strong_corrs": strong_corrs,
             "summary": subset_summary
         }
+# Summary stats
+        subset_summary = subset.describe(include='all')
+
+        subset.to_csv(f"subset_group{p_value}.csv")
+
+        # Correlation matrix
+        correlations = subset.corr()
+
+        # Strong correlations
+        correlated_pairs = (
+            correlations.abs()
+            .unstack()
+            .sort_values(ascending=False)
+        )
+        correlated_pairs = correlated_pairs[correlated_pairs < 1]  # remove self-corr
+        strong_corrs = correlated_pairs[correlated_pairs > threshold]
+
+        # Save results
+        results[p_value] = {
+            "correlations": correlations,
+            "strong_corrs": strong_corrs,
+            "summary": subset_summary
+        }
 
     return results
 
@@ -203,8 +226,8 @@ if __name__ == "__main__":
 
     print(cleaned_data.iloc[0])
 
-    cleaned_data.to_csv("merged_cleaned_data.csv")
-
+    cleaned_data.to_csv("all.csv")
+    
     results = analyze_data_with_nationality(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P", nationality_col="Nationality")
 
     for (group, nationality), data in results.items():
