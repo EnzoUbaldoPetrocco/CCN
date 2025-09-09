@@ -72,7 +72,6 @@ def clean_data_intro(df):
     df["mean_trust_subj"] = (temp + temp2)/2
     return df
 
-
 def clean_data_center(df):
     """Clean the DataFrame by handling missing values and duplicates."""
     df = df.replace('Disagree strongly', 1)
@@ -117,6 +116,8 @@ def analyze_data_with_nationality(df, threshold=0.8, user_id_col="Participant ID
 
             subset_summary = subset.describe(include='all')
 
+            subset.to_csv(f"subset_group{p_value}_nat{n_value}.csv")
+
             # Correlation matrix
             correlations = subset.corr()
 
@@ -154,6 +155,8 @@ def analyze_data_by_group(df, threshold=0.8, user_id_col="Participant ID", group
 
         # Summary stats
         subset_summary = subset.describe(include='all')
+
+        subset.to_csv(f"subset_group{p_value}.csv")
 
         # Correlation matrix
         correlations = subset.corr()
@@ -200,6 +203,8 @@ if __name__ == "__main__":
 
     print(cleaned_data.iloc[0])
 
+    cleaned_data.to_csv("merged_cleaned_data.csv")
+
     results = analyze_data_with_nationality(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P", nationality_col="Nationality")
 
     for (group, nationality), data in results.items():
@@ -215,9 +220,9 @@ if __name__ == "__main__":
         else:
             print(data["strong_corrs"])
         # Optionally save to CSV
-        data["correlations"].to_csv(f"data_center_group{group}_nat{nationality}_correlations.csv")  
-        data["strong_corrs"].to_csv(f"data_center_group{group}_nat{nationality}_strong_corrs.csv")
-        data["summary"].to_csv(f"data_center_group{group}_nat{nationality}_summary.csv")
+        data["correlations"].to_csv(f"group{group}_nat{nationality}_correlations.csv")  
+        data["strong_corrs"].to_csv(f"group{group}_nat{nationality}_strong_corrs.csv")
+        data["summary"].to_csv(f"group{group}_nat{nationality}_summary.csv")
 
     results = analyze_data_by_group(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P")
 
@@ -234,6 +239,6 @@ if __name__ == "__main__":
         else:
             print(data["strong_corrs"])
         # Optionally save to CSV
-        data["correlations"].to_csv(f"data_center_group{group}_correlations.csv")  
-        data["strong_corrs"].to_csv(f"data_center_group{group}_strong_corrs.csv")
-        data["summary"].to_csv(f"data_center_group{group}_summary.csv")
+        data["correlations"].to_csv(f"group{group}_correlations.csv")  
+        data["strong_corrs"].to_csv(f"group{group}_strong_corrs.csv")
+        data["summary"].to_csv(f"group{group}_summary.csv")
