@@ -29,6 +29,17 @@ def clean_data(df):
     df = df.replace(r'^\s*$', np.nan, regex=True).dropna(how="all")
     df = df.drop(df.columns[0], axis=1)
     df = df.drop(df.columns[1], axis=1)
+    
+    df["mean_cultural_closeness_subj"] = df.iloc[:, 2:5].mean(axis=1)
+    df["mean_personality_subj"] = df.iloc[:, 5:15].mean(axis=1)
+    df["extraversion"] = df.iloc[:, 10] - df.iloc[:, 5]
+    df["agreebleness"] = df.iloc[:, 6] - df.iloc[:, 11]
+    df["coscientiousness"] = df.iloc[:, 12] - df.iloc[:, 7]
+    df["neuroticism"] = df.iloc[:, 13] - df.iloc[:, 8]
+    df["openness"] = df.iloc[:, 14] - df.iloc[:, 9]
+    temp = (df.iloc[:, 15:23].mean(axis=1) + df.iloc[:,24] + df.iloc[:, 26:28].mean(axis=1))/11
+    temp2 = (df.iloc[:, 23] + df.iloc[:, 25] + df.iloc[:, 28])/3
+    df["mean_trust_subj"] = (temp + temp2)/2
     return df
 
 def analyze_data(df, threshold=0.8):

@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import math
 
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
@@ -30,7 +31,6 @@ def check_user_validity(
     return valid_users, invalid_users
 
 
-
 def clean_data(df):
     """Clean the DataFrame by handling missing values and duplicates."""
     df = df.drop_duplicates()
@@ -54,6 +54,11 @@ def clean_data(df):
     df = df.map(percent_to_float)
     df = df.replace(r'^\s*$', np.nan, regex=True).dropna(how="all")
     df = df.drop(df.columns[0], axis=1)
+    # Mean of first 3 values per row
+    df["mean_cultural_closeness"] = df.iloc[:, -9:-6].mean(axis=1)
+
+    # Mean of last 6 values per row
+    df["mean_competence"] = df.iloc[:, -6:].mean(axis=1)
     #df = df.drop(df.columns[1], axis=1)
     return df
 
