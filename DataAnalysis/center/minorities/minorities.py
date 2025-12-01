@@ -149,13 +149,12 @@ def take_only_one_culture(df, culture=0):
     return df[df['Nationality'] == culture]
 
 if __name__ == "__main__":
-
-    # -----------------------------------------------------------
-    # 1️⃣ LOAD THE ALLOWED PARTICIPANT IDs (from the intro script)
-    # -----------------------------------------------------------
     import sys
     sys.path.append("../../../")
     from DataAnalysis.intro.minorities.minorities import sanitize_filename
+    import os
+    import pandas as pd
+
     percentages = [0.5, 0.7, 0.9]
     file_path = "../Center CCN (Risposte).csv"
     data = load_data(file_path)
@@ -166,196 +165,118 @@ if __name__ == "__main__":
 
     # Filter only valid users
     df_valid = data[data["Participant ID"].isin(valid_users)]
-
     cleaned_data = clean_data(df_valid)
-    for percentage in percentages:
-        for sentence in [
-            "Which picture best describes your relationship with Italy or Germany?",
-            "Which picture best describes your relationship with Italian or German language?",
-            "Which picture best describes your relationship with Italian or German Culture?"
-        ]:
-            safe_sentence = sanitize_filename(sentence).replace(" ", "_")
 
+    sentences = [
+        "Which picture best describes your relationship with Italy or Germany?",
+        "Which picture best describes your relationship with Italian or German language?",
+        "Which picture best describes your relationship with Italian or German Culture?"
+    ]
+
+    for percentage in percentages:
+        for sentence in sentences:
+            safe_sentence = sanitize_filename(sentence).replace(" ", "_")
             base_path = f"./{percentage}/{safe_sentence}/"
 
-            allowed_ids_path = f"./{base_path}/remaining_participant_ids.csv"
-            allowed_ids = pd.read_csv(allowed_ids_path)["Participant ID"].unique()
+            allowed_ids_path = f"{base_path}/remaining_participant_ids.csv"
+            if not os.path.exists(allowed_ids_path):
+                print(f"⚠️  File not found: {allowed_ids_path}")
+                continue
 
-          
-            # -------------- Nationality Analysis --------------
+            allowed_ids = pd.read_csv(allowed_ids_path)["Participant ID"].unique()
+            filtered_data = cleaned_data[cleaned_data["Participant ID"].isin(allowed_ids)]
+
+            # ---------------- Nationality Analysis ----------------
             results = analyze_data_with_nationality(
-                cleaned_data,
+                filtered_data,
                 threshold=0.8,
                 user_id_col="Participant ID",
                 group_col="P",
                 nationality_col="Nationality"
             )
 
-            for (group, nationality), data in results.items():
+            for (group, nationality), data_res in results.items():
                 print("=" * 60)
                 print(f"Group {group} | Nationality {nationality}")
-
                 print("\nHighly Correlated Pairs (>|0.8|):")
-                if data["strong_corrs"].empty:
+                if data_res["strong_corrs"].empty:
                     print("None found.")
                 else:
-                    print(data["strong_corrs"])
+                    print(data_res["strong_corrs"])
+                os.makedirs(base_path, exist_ok=True)
+                data_res["correlations"].to_csv(f"{base_path}/data_center_group{group}_nat{nationality}_correlations.csv")
+                data_res["strong_corrs"].to_csv(f"{base_path}/data_center_group{group}_nat{nationality}_strong_corrs.csv")
+                data_res["summary"].to_csv(f"{base_path}/data_center_group{group}_nat{nationality}_summary.csv")
 
-                data["correlations"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_correlations.csv")
-                data["strong_corrs"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_strong_corrs.csv")
-                data["summary"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_summary.csv")
-
-            # -------------- Group Analysis --------------
+            # ---------------- Group Analysis ----------------
             results = analyze_data_by_group(
-                cleaned_data,
+                filtered_data,
                 threshold=0.8,
                 user_id_col="Participant ID",
                 group_col="P"
             )
 
-            for group, data in results.items():
+            for group, data_res in results.items():
                 print("=" * 60)
                 print(f"Group {group}")
-
                 print("\nHighly Correlated Pairs (>|0.8|):")
-                if data["strong_corrs"].empty:
+                if data_res["strong_corrs"].empty:
                     print("None found.")
                 else:
-                    print(data["strong_corrs"])
+                    print(data_res["strong_corrs"])
+                data_res["correlations"].to_csv(f"{base_path}/data_center_group{group}_correlations.csv")
+                data_res["strong_corrs"].to_csv(f"{base_path}/data_center_group{group}_strong_corrs.csv")
+                data_res["summary"].to_csv(f"{base_path}/data_center_group{group}_summary.csv")
 
-                data["correlations"].to_csv(f"./{base_path}/data_center_group{group}_correlations.csv")
-                data["strong_corrs"].to_csv(f"./{base_path}/data_center_group{group}_strong_corrs.csv")
-                data["summary"].to_csv(f"./{base_path}/data_center_group{group}_summary.csv")
-
-           
-
-            results = analyze_data_with_nationality(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P", nationality_col="Nationality")
-
-
-            for (group, nationality), data in results.items():
-                print("=" * 60)
-                print(f"Group {group} | Nationality {nationality}")
-
-                #print("\nCorrelation Matrix:")
-                #print(data["correlations"])
-
-                print("\nHighly Correlated Pairs (>|0.8|):")
-                if data["strong_corrs"].empty:
-                    print("None found.")
-                else:
-                    print(data["strong_corrs"])
-                # Optionally save to CSV
-                data["correlations"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_correlations.csv")  
-                data["strong_corrs"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_strong_corrs.csv")
-                data["summary"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_summary.csv")
-
-            results = analyze_data_by_group(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P")
-
-            for group, data in results.items():
-                print("=" * 60)
-                print(f"Group {group}")
-
-                #print("\nCorrelation Matrix:")
-                #print(data["correlations"])
-
-                print("\nHighly Correlated Pairs (>|0.8|):")
-                if data["strong_corrs"].empty:
-                    print("None found.")
-                else:
-                    print(data["strong_corrs"])
-                # Optionally save to CSV
-                data["correlations"].to_csv(f"./{base_path}/data_center_group{group}_correlations.csv")  
-                data["strong_corrs"].to_csv(f"./{base_path}/data_center_group{group}_strong_corrs.csv")
-                data["summary"].to_csv(f"./{base_path}/data_center_group{group}_summary.csv")
-
-
-
+        # ---------------- Mean Analysis ----------------
         base_path = f"./{percentage}/mean/"
-        allowed_ids_path = f"./{base_path}/remaining_participant_ids.csv"
-        allowed_ids = pd.read_csv(allowed_ids_path)["Participant ID"].unique()
+        allowed_ids_path = f"{base_path}/remaining_participant_ids.csv"
+        if not os.path.exists(allowed_ids_path):
+            print(f"⚠️  File not found: {allowed_ids_path}")
+            continue
 
-       
-        # -------------- Nationality Analysis --------------
+        allowed_ids = pd.read_csv(allowed_ids_path)["Participant ID"].unique()
+        filtered_data = cleaned_data[cleaned_data["Participant ID"].isin(allowed_ids)]
+
+        # Nationality
         results = analyze_data_with_nationality(
-            cleaned_data,
+            filtered_data,
             threshold=0.8,
             user_id_col="Participant ID",
             group_col="P",
             nationality_col="Nationality"
         )
 
-        for (group, nationality), data in results.items():
+        for (group, nationality), data_res in results.items():
             print("=" * 60)
             print(f"Group {group} | Nationality {nationality}")
-
             print("\nHighly Correlated Pairs (>|0.8|):")
-            if data["strong_corrs"].empty:
+            if data_res["strong_corrs"].empty:
                 print("None found.")
             else:
-                print(data["strong_corrs"])
+                print(data_res["strong_corrs"])
+            os.makedirs(base_path, exist_ok=True)
+            data_res["correlations"].to_csv(f"{base_path}/data_center_group{group}_nat{nationality}_correlations.csv")
+            data_res["strong_corrs"].to_csv(f"{base_path}/data_center_group{group}_nat{nationality}_strong_corrs.csv")
+            data_res["summary"].to_csv(f"{base_path}/data_center_group{group}_nat{nationality}_summary.csv")
 
-            data["correlations"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_correlations.csv")
-            data["strong_corrs"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_strong_corrs.csv")
-            data["summary"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_summary.csv")
-
-        # -------------- Group Analysis --------------
+        # Group only
         results = analyze_data_by_group(
-            cleaned_data,
+            filtered_data,
             threshold=0.8,
             user_id_col="Participant ID",
             group_col="P"
         )
 
-        for group, data in results.items():
+        for group, data_res in results.items():
             print("=" * 60)
             print(f"Group {group}")
-
             print("\nHighly Correlated Pairs (>|0.8|):")
-            if data["strong_corrs"].empty:
+            if data_res["strong_corrs"].empty:
                 print("None found.")
             else:
-                print(data["strong_corrs"])
-
-            data["correlations"].to_csv(f"./{base_path}/data_center_group{group}_correlations.csv")
-            data["strong_corrs"].to_csv(f"./{base_path}/data_center_group{group}_strong_corrs.csv")
-            data["summary"].to_csv(f"./{base_path}/data_center_group{group}_summary.csv")
-
-        
-        results = analyze_data_with_nationality(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P", nationality_col="Nationality")
-
-
-        for (group, nationality), data in results.items():
-            print("=" * 60)
-            print(f"Group {group} | Nationality {nationality}")
-
-            #print("\nCorrelation Matrix:")
-            #print(data["correlations"])
-
-            print("\nHighly Correlated Pairs (>|0.8|):")
-            if data["strong_corrs"].empty:
-                print("None found.")
-            else:
-                print(data["strong_corrs"])
-            # Optionally save to CSV
-            data["correlations"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_correlations.csv")  
-            data["strong_corrs"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_strong_corrs.csv")
-            data["summary"].to_csv(f"./{base_path}/data_center_group{group}_nat{nationality}_summary.csv")
-
-        results = analyze_data_by_group(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P")
-
-        for group, data in results.items():
-            print("=" * 60)
-            print(f"Group {group}")
-
-            #print("\nCorrelation Matrix:")
-            #print(data["correlations"])
-
-            print("\nHighly Correlated Pairs (>|0.8|):")
-            if data["strong_corrs"].empty:
-                print("None found.")
-            else:
-                print(data["strong_corrs"])
-            # Optionally save to CSV
-            data["correlations"].to_csv(f"./{base_path}/data_center_group{group}_correlations.csv")  
-            data["strong_corrs"].to_csv(f"./{base_path}/data_center_group{group}_strong_corrs.csv")
-            data["summary"].to_csv(f"./{base_path}/data_center_group{group}_summary.csv")
+                print(data_res["strong_corrs"])
+            data_res["correlations"].to_csv(f"{base_path}/data_center_group{group}_correlations.csv")
+            data_res["strong_corrs"].to_csv(f"{base_path}/data_center_group{group}_strong_corrs.csv")
+            data_res["summary"].to_csv(f"{base_path}/data_center_group{group}_summary.csv")
+     
