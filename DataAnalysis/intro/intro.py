@@ -59,7 +59,7 @@ def analyze_data(df, threshold=0.8):
     correlated_pairs = correlated_pairs[correlated_pairs < 1]
 
     # Keep only those above threshold
-    strong_corrs = correlated_pairs[correlated_pairs > threshold]
+    strong_corrs = correlated_pairs[correlated_pairs.abs() > threshold]
 
     return summary, correlations, strong_corrs
 

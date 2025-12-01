@@ -128,7 +128,7 @@ def analyze_data_with_nationality(df, threshold=0.8, user_id_col="Participant ID
                 .sort_values(ascending=False)
             )
             correlated_pairs = correlated_pairs[correlated_pairs < 1]  # remove self-corr
-            strong_corrs = correlated_pairs[correlated_pairs > threshold]
+            strong_corrs = correlated_pairs[correlated_pairs.abs() > threshold]
 
             # Save results
             results[(p_value, n_value)] = {
