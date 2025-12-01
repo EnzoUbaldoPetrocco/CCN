@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import math
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
@@ -123,11 +125,11 @@ def analyze_data_with_nationality(df, threshold=0.8, user_id_col="Participant ID
 
             # Strong correlations
             correlated_pairs = (
-                correlations.abs()
+                correlations
                 .unstack()
                 .sort_values(ascending=False)
             )
-            correlated_pairs = correlated_pairs[correlated_pairs < 1]  # remove self-corr
+            correlated_pairs = correlated_pairs[correlated_pairs.abs() < 1]  # remove self-corr
             strong_corrs = correlated_pairs[correlated_pairs.abs() > threshold]
 
             # Save results
@@ -163,11 +165,11 @@ def analyze_data_by_group(df, threshold=0.8, user_id_col="Participant ID", group
 
         # Strong correlations
         correlated_pairs = (
-            correlations.abs()
+            correlations
             .unstack()
             .sort_values(ascending=False)
         )
-        correlated_pairs = correlated_pairs[correlated_pairs < 1]  # remove self-corr
+        correlated_pairs = correlated_pairs[correlated_pairs.abs() < 1]  # remove self-corr
         strong_corrs = correlated_pairs[correlated_pairs > threshold]
 
         # Save results
@@ -210,6 +212,57 @@ def take_only_one_culture(df, culture=0):
 if __name__ == "__main__":
     file_path_center = "../center/Center CCN (Risposte).csv"
     file_path_intro = "../intro/Intro CCN  (Risposte).CSV"
+
+    label_map = {
+         # Closeness questions
+            "Which picture best describes your relationship with Italy or Germany?": "Closeness_Country",
+            "Which picture best describes your relationship with Italian or German language?": "Closeness_Language",
+            "Which picture best describes your relationship with Italian or German Culture?": "Closeness_Culture",
+
+            # Personality (OCEAN 10)
+            "I see myself as someone who  [... is reserved ]": "Reserved",
+            "I see myself as someone who  [... is generally trusting]": "Trusting",
+            "I see myself as someone who  [... tends to be lazy]": "Lazy",
+            "I see myself as someone who  [... is relaxed, handles stress well]": "Relaxed",
+            "I see myself as someone who  [... has few artistic interests]": "Artistic",
+            "I see myself as someone who  [... is ongoing, sociable]": "Sociable",
+            "I see myself as someone who  [... tends to find fault with others]": "Critical",
+            "I see myself as someone who  [... does a thorough job]": "Thorough",
+            "I see myself as someone who  [... get nervous easily]": "Neurotic",
+            "I see myself as someone who  [... has active imagination]": "Imaginative",
+
+            # Trust in Technology (Trust 14 items)
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Function successfully]": "Function",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Act consistenly]": "Consistent",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Reliable]": "Reliable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Predictable]": "Predictable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Dependable]": "Dependable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Follow directions]": "Follow_Directions",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Meet the needs of the mission]": "Mission",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Perform exactly as instructed]": "Perform",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]": "Errors",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide appropriate information]": "Info",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]": "Malfunction",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Communicate with people]": "Communicate",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide Feedback]": "Feedback",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Unresponsive]": "Unresponsive",
+
+            # Culture perception (first three)
+            "Which picture best describes the relationship between Pepper and your country? ": "Culture_Country",
+            "Which picture best describes the relationship between Pepper and your national culture? ": "Culture_National",
+            "Which picture best describes the relationship between Pepper and your own preferences? ": "Culture_Preferences",
+
+            # Robot competence / impression (Rosas scale)
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ": "Capable",
+            # The next 5 questions are the same text repeated in your CSV; you can map them sequentially
+            # Assuming the columns appear in order for the six competence items:
+            # If you have 6 columns with identical names, pandas will auto-add .1, .2, etc.
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1": "Responsive",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2": "Interactive",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3": "Reliable",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4": "Competent",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5": "Knowledgable"
+    }
     
     data_intro = load_data(file_path_intro)
     data_center = load_data(file_path_center)
@@ -247,6 +300,17 @@ if __name__ == "__main__":
         data["strong_corrs"].to_csv(f"group{group}_nat{nationality}_strong_corrs.csv")
         data["summary"].to_csv(f"group{group}_nat{nationality}_summary.csv")
 
+        if data["correlations"].empty:
+            continue
+        corr_df_short = data["correlations"].rename(columns=label_map, index=label_map)
+        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+        plt.figure(figsize=(20, 16))
+        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+        plt.tight_layout()
+        plt.savefig(f"./data_center_group{group}_nat{nationality}_correlation_heatmap_upper.png", dpi=300)
+        plt.close()
+
     results = analyze_data_by_group(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P")
 
     for group, data in results.items():
@@ -265,3 +329,14 @@ if __name__ == "__main__":
         data["correlations"].to_csv(f"group{group}_correlations.csv")  
         data["strong_corrs"].to_csv(f"group{group}_strong_corrs.csv")
         data["summary"].to_csv(f"group{group}_summary.csv")
+
+        if data["correlations"].empty:
+            continue
+        corr_df_short = data["correlations"].rename(columns=label_map, index=label_map)
+        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+        plt.figure(figsize=(20, 16))
+        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+        plt.tight_layout()
+        plt.savefig(f"./data_center_group{group}_correlation_heatmap_upper.png", dpi=300)
+        plt.close()

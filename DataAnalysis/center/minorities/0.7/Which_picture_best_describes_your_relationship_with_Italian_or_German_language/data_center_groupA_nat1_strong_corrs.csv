@@ -1,3 +1,23 @@
 ,,0
-mean_cultural_closeness,mean_competence,0.9999999999999999
 mean_competence,mean_cultural_closeness,0.9999999999999999
+mean_cultural_closeness,mean_competence,0.9999999999999999
+Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+Which picture best describes the relationship between Pepper and your national culture? ,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,Which picture best describes the relationship between Pepper and your country? ,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,Which picture best describes the relationship between Pepper and your national culture? ,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,-1.0
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,mean_competence,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,-1.0
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,-1.0
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,-1.0
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+mean_competence,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0
+Which picture best describes the relationship between Pepper and your own preferences? ,mean_cultural_closeness,-1.0000000000000002
+mean_cultural_closeness,Which picture best describes the relationship between Pepper and your own preferences? ,-1.0000000000000002

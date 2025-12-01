@@ -1,39 +1,39 @@
 ,,0
-Which picture best describes the relationship between Pepper and your national culture? ,mean_cultural_closeness,0.9502094580971224
 mean_cultural_closeness,Which picture best describes the relationship between Pepper and your national culture? ,0.9502094580971224
-I see myself as someone who  [... tends to be lazy],coscientiousness,0.9227086008212235
-coscientiousness,I see myself as someone who  [... tends to be lazy],0.9227086008212235
-"I see myself as someone who  [... is ongoing, sociable]",extraversion,0.9203017530109905
+Which picture best describes the relationship between Pepper and your national culture? ,mean_cultural_closeness,0.9502094580971224
 extraversion,"I see myself as someone who  [... is ongoing, sociable]",0.9203017530109905
+"I see myself as someone who  [... is ongoing, sociable]",extraversion,0.9203017530109905
 "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]",mean_trust_subj,0.9073010579224309
 mean_trust_subj,"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]",0.9073010579224309
-I see myself as someone who  [... is reserved ],extraversion,0.8839022330955834
-extraversion,I see myself as someone who  [... is reserved ],0.8839022330955834
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.872338159137558
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,mean_competence,0.872338159137558
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8617190771818704
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8617190771818704
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8617190771818704
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,0.8612172444634744
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,mean_competence,0.8612172444634744
-mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,0.8605430720750741
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,mean_competence,0.8605430720750741
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,0.8605430720750741
 neuroticism,I see myself as someone who  [... get nervous easily],0.8599987667674066
 I see myself as someone who  [... get nervous easily],neuroticism,0.8599987667674066
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_competence,0.8592933481131441
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8592933481131441
-mean_trust_subj,"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]",0.8513523727392575
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_competence,0.8592933481131441
 "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]",mean_trust_subj,0.8513523727392575
-openness,I see myself as someone who  [... has few artistic interests],0.8502234689736576
-I see myself as someone who  [... has few artistic interests],openness,0.8502234689736576
-"I see myself as someone who  [... is relaxed, handles stress well]",neuroticism,0.8490651420931044
-neuroticism,"I see myself as someone who  [... is relaxed, handles stress well]",0.8490651420931044
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,mean_competence,0.8331600347522784
+mean_trust_subj,"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]",0.8513523727392575
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,0.8331600347522784
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,mean_competence,0.8331600347522784
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,mean_competence,0.8280522148804149
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8280522148804149
-I see myself as someone who  [... tends to find fault with others],agreebleness,0.820128725200089
-agreebleness,I see myself as someone who  [... tends to find fault with others],0.820128725200089
-I see myself as someone who  [... does a thorough job],coscientiousness,0.8194768771760512
 coscientiousness,I see myself as someone who  [... does a thorough job],0.8194768771760512
+I see myself as someone who  [... does a thorough job],coscientiousness,0.8194768771760512
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8169181097318327
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.8169181097318327
+agreebleness,I see myself as someone who  [... tends to find fault with others],-0.820128725200089
+I see myself as someone who  [... tends to find fault with others],agreebleness,-0.820128725200089
+"I see myself as someone who  [... is relaxed, handles stress well]",neuroticism,-0.8490651420931044
+neuroticism,"I see myself as someone who  [... is relaxed, handles stress well]",-0.8490651420931044
+openness,I see myself as someone who  [... has few artistic interests],-0.8502234689736576
+I see myself as someone who  [... has few artistic interests],openness,-0.8502234689736576
+extraversion,I see myself as someone who  [... is reserved ],-0.8839022330955834
+I see myself as someone who  [... is reserved ],extraversion,-0.8839022330955834
+coscientiousness,I see myself as someone who  [... tends to be lazy],-0.9227086008212235
+I see myself as someone who  [... tends to be lazy],coscientiousness,-0.9227086008212235

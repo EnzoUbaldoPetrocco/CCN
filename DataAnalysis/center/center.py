@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import math
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
@@ -84,12 +86,12 @@ def analyze_data_with_nationality(df, threshold=0.8, user_id_col="Participant ID
 
             # Strong correlations
             correlated_pairs = (
-                correlations.abs()
+                correlations
                 .unstack()
                 .sort_values(ascending=False)
             )
             correlated_pairs = correlated_pairs[correlated_pairs < 1]  # remove self-corr
-            strong_corrs = correlated_pairs[correlated_pairs > threshold]
+            strong_corrs = correlated_pairs[correlated_pairs.abs() > threshold]
 
             # Save results
             results[(p_value, n_value)] = {
@@ -148,6 +150,25 @@ if __name__ == "__main__":
     data = load_data(file_path)
     valid_users, invalid_users = check_user_validity(data)
 
+    label_map = {
+        # Culture perception (first three)
+        "Which picture best describes the relationship between Pepper and your country? ": "Culture_Country",
+        "Which picture best describes the relationship between Pepper and your national culture? ": "Culture_National",
+        "Which picture best describes the relationship between Pepper and your own preferences? ": "Culture_Preferences",
+
+        # Robot competence / impression (Rosas scale)
+        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ": "Capable",
+        # The next 5 questions are the same text repeated in your CSV; you can map them sequentially
+        # Assuming the columns appear in order for the six competence items:
+        # If you have 6 columns with identical names, pandas will auto-add .1, .2, etc.
+        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1": "Responsive",
+        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2": "Interactive",
+        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3": "Reliable",
+        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4": "Competent",
+        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5": "Knowledgable"
+    }
+
+
     print("✅ Valid Users:", valid_users)
     print("❌ Invalid Users:", invalid_users)
 
@@ -176,6 +197,17 @@ if __name__ == "__main__":
         data["strong_corrs"].to_csv(f"data_center_group{group}_nat{nationality}_strong_corrs.csv")
         data["summary"].to_csv(f"data_center_group{group}_nat{nationality}_summary.csv")
 
+        corr_df_short = data["correlations"].rename(columns=label_map, index=label_map)
+        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+        plt.figure(figsize=(20, 16))
+        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+        plt.tight_layout()
+        plt.savefig(f"./data_center_group{group}_nat{nationality}_correlation_heatmap_upper.png", dpi=300)
+        plt.close()
+
+
+
     results = analyze_data_by_group(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P")
 
     for group, data in results.items():
@@ -191,6 +223,15 @@ if __name__ == "__main__":
         else:
             print(data["strong_corrs"])
         # Optionally save to CSV
-        data["correlations"].to_csv(f"data_center_group{group}_correlations.csv")  
+        data["correlations"].to_csv(f"data_center_group{group}_correlations.csv") 
         data["strong_corrs"].to_csv(f"data_center_group{group}_strong_corrs.csv")
         data["summary"].to_csv(f"data_center_group{group}_summary.csv")
+
+        corr_df_short = data["correlations"].rename(columns=label_map, index=label_map)
+        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+        plt.figure(figsize=(20, 16))
+        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+        plt.tight_layout()
+        plt.savefig(f"./data_center_group{group}_correlation_heatmap_upper.png", dpi=300)
+        plt.close()

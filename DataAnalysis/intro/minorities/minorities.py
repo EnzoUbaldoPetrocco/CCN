@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import os
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
@@ -122,6 +124,42 @@ if __name__ == "__main__":
     data = load_data(file_path)
     cleaned_data = clean_data(data)
 
+    label_map = {
+            # Closeness questions
+            "Which picture best describes your relationship with Italy or Germany?": "Closeness_Country",
+            "Which picture best describes your relationship with Italian or German language?": "Closeness_Language",
+            "Which picture best describes your relationship with Italian or German Culture?": "Closeness_Culture",
+
+            # Personality (OCEAN 10)
+            "I see myself as someone who  [... is reserved ]": "Reserved",
+            "I see myself as someone who  [... is generally trusting]": "Trusting",
+            "I see myself as someone who  [... tends to be lazy]": "Lazy",
+            "I see myself as someone who  [... is relaxed, handles stress well]": "Relaxed",
+            "I see myself as someone who  [... has few artistic interests]": "Artistic",
+            "I see myself as someone who  [... is ongoing, sociable]": "Sociable",
+            "I see myself as someone who  [... tends to find fault with others]": "Critical",
+            "I see myself as someone who  [... does a thorough job]": "Thorough",
+            "I see myself as someone who  [... get nervous easily]": "Neurotic",
+            "I see myself as someone who  [... has active imagination]": "Imaginative",
+
+            # Trust in Technology (Trust 14 items)
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Function successfully]": "Function",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Act consistenly]": "Consistent",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Reliable]": "Reliable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Predictable]": "Predictable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Dependable]": "Dependable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Follow directions]": "Follow_Directions",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Meet the needs of the mission]": "Mission",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Perform exactly as instructed]": "Perform",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]": "Errors",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide appropriate information]": "Info",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]": "Malfunction",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Communicate with people]": "Communicate",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide Feedback]": "Feedback",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Unresponsive]": "Unresponsive"
+        }
+
+
     for percentage in [0.5, 0.7, 0.9]:
         for sentence in [
             "Which picture best describes your relationship with Italy or Germany?",
@@ -157,6 +195,15 @@ if __name__ == "__main__":
             print(f"Filtered data summary saved to {output_filtered_summary}")
             print(f"Filtered data correlations saved to {output_filtered_correlations}")
 
+            corr_df_short = correlations.rename(columns=label_map, index=label_map)
+            mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+            plt.figure(figsize=(20, 16))
+            sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+            plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+            plt.tight_layout()
+            plt.savefig(f"./{base_path}/correlation_heatmap_upper.png", dpi=300)
+            plt.close()
+
             german_data = take_only_one_culture(filtered_df, culture=0)
             german_summary, german_correlations, german_strong_corrs = analyze_data(german_data)
             output_german_summary = f"./{base_path}/data_intro_german_summary.csv"
@@ -165,6 +212,17 @@ if __name__ == "__main__":
             german_correlations.to_csv(output_german_correlations)
             print(f"German data summary saved to {output_german_summary}")
             print(f"German data correlations saved to {output_german_correlations}")
+
+            corr_df_short = german_correlations.rename(columns=label_map, index=label_map)
+            mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+            plt.figure(figsize=(20, 16))
+            sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+            plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+            plt.tight_layout()
+            plt.savefig(f"./{base_path}/correlation_heatmap_german_upper.png", dpi=300)
+            plt.close()
+
+
             italian_data = take_only_one_culture(filtered_df, culture=1)
             italian_summary, italian_correlations, italian_strong_corrs = analyze_data(italian_data)
             output_italian_summary = f"./{base_path}/data_intro_italian_summary.csv"
@@ -173,6 +231,15 @@ if __name__ == "__main__":
             italian_correlations.to_csv(output_italian_correlations)
             print(f"Italian data summary saved to {output_italian_summary}")
             print(f"Italian data correlations saved to {output_italian_correlations}")
+
+            corr_df_short = italian_correlations.rename(columns=label_map, index=label_map)
+            mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+            plt.figure(figsize=(20, 16))
+            sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+            plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+            plt.tight_layout()
+            plt.savefig(f"./{base_path}/correlation_heatmap_italian_upper.png", dpi=300)
+            plt.close()
 
         os.makedirs(f"./{percentage}", exist_ok=True)
         os.makedirs(f"./{percentage}/mean/", exist_ok=True)
@@ -204,6 +271,16 @@ if __name__ == "__main__":
         correlations.to_csv(output_filtered_correlations)
         print(f"Filtered data summary saved to {output_filtered_summary}")
         print(f"Filtered data correlations saved to {output_filtered_correlations}")
+
+        corr_df_short = correlations.rename(columns=label_map, index=label_map)
+        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+        plt.figure(figsize=(20, 16))
+        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+        plt.tight_layout()
+        plt.savefig(f"./{base_path}/correlation_heatmap_upper.png", dpi=300)
+        plt.close()
+
         german_data = take_only_one_culture(filtered_df, culture=0)
         german_summary, german_correlations, german_strong_corrs = analyze_data(german_data)
         output_german_summary = f"./{base_path}/data_intro_german_summary.csv"
@@ -212,6 +289,16 @@ if __name__ == "__main__":
         german_correlations.to_csv(output_german_correlations)
         print(f"German data summary saved to {output_german_summary}")
         print(f"German data correlations saved to {output_german_correlations}")
+
+        corr_df_short = german_correlations.rename(columns=label_map, index=label_map)
+        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+        plt.figure(figsize=(20, 16))
+        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+        plt.tight_layout()
+        plt.savefig(f"./{base_path}/correlation_heatmap_german_upper.png", dpi=300)
+        plt.close()
+
         italian_data = take_only_one_culture(filtered_df, culture=1)
         italian_summary, italian_correlations, italian_strong_corrs = analyze_data(italian_data)
         output_italian_summary = f"./{base_path}/data_intro_italian_summary.csv"
@@ -220,5 +307,14 @@ if __name__ == "__main__":
         italian_correlations.to_csv(output_italian_correlations)
         print(f"Italian data summary saved to {output_italian_summary}")
         print(f"Italian data correlations saved to {output_italian_correlations}")
+
+        corr_df_short = italian_correlations.rename(columns=label_map, index=label_map)
+        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+        plt.figure(figsize=(20, 16))
+        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+        plt.tight_layout()
+        plt.savefig(f"./{base_path}/correlation_heatmap_italian_upper.png", dpi=300)
+        plt.close()
 
 
