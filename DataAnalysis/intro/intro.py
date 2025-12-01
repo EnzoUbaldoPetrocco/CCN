@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
@@ -73,7 +76,52 @@ if __name__ == "__main__":
     data = load_data(file_path)
     cleaned_data = clean_data(data)
 
+    label_map = {
+            # Closeness questions
+            "Which picture best describes your relationship with Italy or Germany?": "Closeness_Country",
+            "Which picture best describes your relationship with Italian or German language?": "Closeness_Language",
+            "Which picture best describes your relationship with Italian or German Culture?": "Closeness_Culture",
+
+            # Personality (OCEAN 10)
+            "I see myself as someone who  [... is reserved ]": "Reserved",
+            "I see myself as someone who  [... is generally trusting]": "Trusting",
+            "I see myself as someone who  [... tends to be lazy]": "Lazy",
+            "I see myself as someone who  [... is relaxed, handles stress well]": "Relaxed",
+            "I see myself as someone who  [... has few artistic interests]": "Artistic",
+            "I see myself as someone who  [... is ongoing, sociable]": "Sociable",
+            "I see myself as someone who  [... tends to find fault with others]": "Critical",
+            "I see myself as someone who  [... does a thorough job]": "Thorough",
+            "I see myself as someone who  [... get nervous easily]": "Neurotic",
+            "I see myself as someone who  [... has active imagination]": "Imaginative",
+
+            # Trust in Technology (Trust 14 items)
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Function successfully]": "Function",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Act consistenly]": "Consistent",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Reliable]": "Reliable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Predictable]": "Predictable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Dependable]": "Dependable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Follow directions]": "Follow_Directions",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Meet the needs of the mission]": "Mission",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Perform exactly as instructed]": "Perform",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]": "Errors",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide appropriate information]": "Info",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]": "Malfunction",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Communicate with people]": "Communicate",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide Feedback]": "Feedback",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Unresponsive]": "Unresponsive"
+        }
+
+
     summary, correlations, strong_corrs = analyze_data(cleaned_data)
+
+    corr_df_short = correlations.rename(columns=label_map, index=label_map)
+    mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+    plt.figure(figsize=(20, 16))
+    sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+    plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+    plt.tight_layout()
+    plt.savefig("correlation_heatmap_upper.png", dpi=300)
+    plt.close()
     
     #print("Data Summary:")
     #print(summary)
@@ -96,6 +144,16 @@ if __name__ == "__main__":
     print("\nStrong Correlations in German Data (>|0.8|):")
     print(german_strong_corrs)
 
+    corr_df_short = german_correlations.rename(columns=label_map, index=label_map)
+    mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+    plt.figure(figsize=(20, 16))
+    sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+    plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+    plt.tight_layout()
+    plt.savefig("correlation_heatmap_german_upper.png", dpi=300)
+    plt.close()
+
+
 
     italian_data = take_only_one_culture(cleaned_data, culture=1)
     italian_summary, italian_correlations, italian_strong_corrs = analyze_data(italian_data)
@@ -107,4 +165,13 @@ if __name__ == "__main__":
     italian_correlations.to_csv("data_intro_italian_correlations.csv")
     print("\nStrong Correlations in Italian Data (>|0.8|):")
     print(italian_strong_corrs)
+
+    corr_df_short = italian_correlations.rename(columns=label_map, index=label_map)
+    mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
+    plt.figure(figsize=(20, 16))
+    sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
+    plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
+    plt.tight_layout()
+    plt.savefig("correlation_heatmap_italian_upper.png", dpi=300)
+    plt.close()
 
