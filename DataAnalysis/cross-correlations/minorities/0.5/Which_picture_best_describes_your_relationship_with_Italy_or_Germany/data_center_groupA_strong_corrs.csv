@@ -1,37 +1,41 @@
 ,,0
-Which picture best describes the relationship between Pepper and your national culture? ,mean_cultural_closeness,0.9349953977272186
-mean_cultural_closeness,Which picture best describes the relationship between Pepper and your national culture? ,0.9349953977272186
-extraversion,"I see myself as someone who  [... is ongoing, sociable]",0.919109876549084
-"I see myself as someone who  [... is ongoing, sociable]",extraversion,0.919109876549084
-I see myself as someone who  [... tends to be lazy],coscientiousness,0.9089371901386377
-coscientiousness,I see myself as someone who  [... tends to be lazy],0.9089371901386377
-mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,0.8904919184694977
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,mean_competence,0.8904919184694977
-I see myself as someone who  [... is reserved ],extraversion,0.882886229013539
-extraversion,I see myself as someone who  [... is reserved ],0.882886229013539
-I see myself as someone who  [... get nervous easily],neuroticism,0.8705768234809785
-neuroticism,I see myself as someone who  [... get nervous easily],0.8705768234809785
-mean_trust_subj,"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]",0.8637507527860612
-"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]",mean_trust_subj,0.8637507527860612
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_competence,0.8622288397862719
-mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8622288397862719
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8578574885544372
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8578574885544372
-openness,I see myself as someone who  [... has few artistic interests],0.8560144664322846
-I see myself as someone who  [... has few artistic interests],openness,0.8560144664322846
-mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8554878014011745
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,mean_competence,0.8554878014011745
-mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.8551870715886124
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,mean_competence,0.8551870715886124
-"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]",mean_trust_subj,0.8452226388668016
-mean_trust_subj,"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]",0.8452226388668016
-mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,0.8440707470249775
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,mean_competence,0.8440707470249775
-"I see myself as someone who  [... is relaxed, handles stress well]",neuroticism,0.8407249858909238
-neuroticism,"I see myself as someone who  [... is relaxed, handles stress well]",0.8407249858909238
-Which picture best describes your relationship with Italian or German language?,mean_cultural_closeness_subj,0.8351773692915291
-mean_cultural_closeness_subj,Which picture best describes your relationship with Italian or German language?,0.8351773692915291
-mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,0.8227928654242128
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,mean_competence,0.8227928654242128
-mean_cultural_closeness,Which picture best describes the relationship between Pepper and your country? ,0.8010285383091024
-Which picture best describes the relationship between Pepper and your country? ,mean_cultural_closeness,0.8010285383091024
+Which picture best describes the relationship between Pepper and your national culture? ,mean_cultural_closeness,0.946094171801483
+mean_cultural_closeness,Which picture best describes the relationship between Pepper and your national culture? ,0.946094171801483
+Which picture best describes the relationship between Pepper and your country? ,mean_cultural_closeness,0.930507575598359
+mean_cultural_closeness,Which picture best describes the relationship between Pepper and your country? ,0.930507575598359
+"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]",mean_trust_subj,0.9145513415001036
+mean_trust_subj,"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]",0.9145513415001036
+Which picture best describes the relationship between Pepper and your national culture? ,Which picture best describes the relationship between Pepper and your country? ,0.9131995423168279
+Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your national culture? ,0.9131995423168279
+neuroticism,"I see myself as someone who  [... is relaxed, handles stress well]",0.8980242176398533
+"I see myself as someone who  [... is relaxed, handles stress well]",neuroticism,0.8980242176398533
+neuroticism,I see myself as someone who  [... get nervous easily],0.8960917173839853
+I see myself as someone who  [... get nervous easily],neuroticism,0.8960917173839853
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,mean_competence,0.8852217973768715
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,0.8852217973768715
+coscientiousness,I see myself as someone who  [... tends to be lazy],0.8761721795146726
+I see myself as someone who  [... tends to be lazy],coscientiousness,0.8761721795146726
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8729645325191984
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,mean_competence,0.8729645325191984
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8642119091644228
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8642119091644228
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_competence,0.8590936814006739
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8590936814006739
+I see myself as someone who  [... is reserved ],extraversion,0.8576534353196816
+extraversion,I see myself as someone who  [... is reserved ],0.8576534353196816
+mean_trust_subj,"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]",0.8543452793472318
+"Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]",mean_trust_subj,0.8543452793472318
+agreebleness,I see myself as someone who  [... is generally trusting],0.8476527681501734
+I see myself as someone who  [... is generally trusting],agreebleness,0.8476527681501734
+mean_cultural_closeness,Which picture best describes the relationship between Pepper and your own preferences? ,0.8413806851520726
+Which picture best describes the relationship between Pepper and your own preferences? ,mean_cultural_closeness,0.8413806851520726
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,mean_competence,0.840881185543132
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,0.840881185543132
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.8398129222875642
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,mean_competence,0.8398129222875642
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8314530784920982
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.8314530784920982
+openness,I see myself as someone who  [... has few artistic interests],0.8294318064800579
+I see myself as someone who  [... has few artistic interests],openness,0.8294318064800579
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.8025525345034925
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8025525345034925

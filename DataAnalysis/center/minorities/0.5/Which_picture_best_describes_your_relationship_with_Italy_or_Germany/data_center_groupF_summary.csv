@@ -1,9 +1,9 @@
 ,Nationality,Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your national culture? ,Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_cultural_closeness,mean_competence
 count,38.0,38.0,38.0,38.0,38.0,38.0,38.0,38.0,38.0,38.0,38.0,38.0
-mean,0.2631578947368421,2.8684210526315788,2.8947368421052633,3.5,5.631578947368421,6.5,6.2105263157894735,5.394736842105263,6.2631578947368425,5.7368421052631575,3.0877192982456143,5.5321637426900585
-std,0.4462583499902144,1.3982818149927443,1.310858470192814,1.465826950444236,1.7770466332772772,1.7514472779868562,1.9612171446522568,1.7169972797316757,1.5714378082527665,1.7504317695359772,1.2147348863031375,1.3324341048628618
-min,0.0,1.0,1.0,1.0,2.0,3.0,2.0,2.0,3.0,2.0,1.0,3.222222222222222
-25%,0.0,2.0,2.0,2.25,4.0,6.0,4.25,4.25,5.0,5.0,2.3333333333333335,4.527777777777778
-50%,0.0,3.0,2.5,3.0,6.0,7.0,7.0,5.0,6.0,6.0,3.0,5.666666666666667
-75%,0.75,4.0,4.0,5.0,7.0,8.0,8.0,6.0,7.0,7.0,3.9166666666666665,6.597222222222222
-max,1.0,6.0,6.0,6.0,9.0,9.0,9.0,9.0,9.0,9.0,6.0,7.722222222222222
+mean,0.631578947368421,3.0526315789473686,2.973684210526316,3.3947368421052633,5.2894736842105265,6.184210526315789,6.131578947368421,5.2631578947368425,6.447368421052632,5.631578947368421,3.1403508771929824,5.466374269005848
+std,0.4888515295293514,1.558713406056117,1.700347215817566,1.669106795997132,1.9439148954906396,1.9570422133288456,2.145656235930642,1.8553678228802049,1.9686374547297953,1.964840308916938,1.4960038439741374,1.579319736398284
+min,0.0,1.0,1.0,1.0,2.0,2.0,1.0,1.0,2.0,2.0,1.0,2.1666666666666665
+25%,0.0,2.0,2.0,2.0,4.0,6.0,5.0,5.0,5.0,4.0,2.0,4.513888888888889
+50%,1.0,3.0,2.5,3.5,6.0,7.0,6.5,5.0,7.0,6.0,2.6666666666666665,5.361111111111111
+75%,1.0,4.0,4.0,4.75,7.0,7.0,8.0,6.0,8.0,7.0,4.25,6.694444444444445
+max,1.0,6.0,7.0,7.0,9.0,9.0,9.0,8.0,9.0,9.0,6.333333333333333,7.944444444444444

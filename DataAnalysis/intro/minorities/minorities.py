@@ -76,7 +76,7 @@ def remove_top_percentage(df, columns, percentage=0.10, use_mean=False):
     n_remove = int(len(df) * percentage)
 
     # Get indices of rows with highest scores
-    top_idx = scores.sort_values(ascending=False).head(n_remove).index
+    top_idx = scores.sort_values(ascending=True).head(n_remove).index
 
     # Split into kept + removed datasets
     removed_rows = df.loc[top_idx]

@@ -1,9 +1,9 @@
 ,Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your national culture? ,Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_cultural_closeness,mean_competence
-count,20.0,20.0,20.0,20.0,20.0,20.0,20.0,20.0,20.0,20.0,20.0
-mean,2.8,2.75,3.6,5.55,6.3,6.25,5.55,6.35,5.5,3.05,5.5
-std,1.2814465510343749,1.2513150976809202,1.5355437918998291,1.79105966869954,1.949358868961793,1.9159991209755154,1.700619082322051,1.4608937423083819,1.7621756887140216,1.1356786877772007,1.3279618898999477
-min,1.0,1.0,1.0,2.0,3.0,3.0,3.0,4.0,3.0,1.0,3.6666666666666665
-25%,2.0,2.0,3.0,4.0,5.0,5.0,5.0,5.75,4.0,2.5,4.277777777777778
-50%,3.0,2.0,3.0,5.5,7.0,6.5,5.0,6.0,5.0,3.0,5.555555555555555
-75%,4.0,4.0,5.0,7.0,7.25,8.0,6.0,7.0,6.25,3.75,6.513888888888889
-max,5.0,5.0,6.0,9.0,9.0,9.0,9.0,9.0,9.0,5.333333333333333,7.722222222222222
+count,8.0,8.0,8.0,8.0,8.0,8.0,8.0,8.0,8.0,8.0,8.0
+mean,3.0,3.25,3.5,6.125,6.625,6.375,6.125,7.0,6.5,3.25,5.979166666666666
+std,1.7728105208558367,1.8322507626258087,1.7728105208558367,0.9910312089651149,1.5059406173077154,1.407885953173359,1.3562026818605375,1.5118578920369088,1.1952286093343936,1.7343403668070776,1.1837142616623264
+min,1.0,1.0,1.0,5.0,4.0,4.0,5.0,5.0,5.0,1.3333333333333333,4.111111111111112
+25%,1.75,2.0,2.0,5.0,6.0,5.75,5.0,5.75,5.75,1.6666666666666667,5.347222222222221
+50%,2.5,2.5,3.5,6.5,6.5,6.5,5.5,7.5,6.5,2.833333333333333,6.194444444444445
+75%,5.0,5.0,5.0,7.0,7.25,7.25,7.25,8.0,7.25,5.0,6.791666666666667
+max,5.0,6.0,6.0,7.0,9.0,8.0,8.0,9.0,8.0,5.666666666666667,7.333333333333333
