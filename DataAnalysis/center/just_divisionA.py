@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import math
 import seaborn as sns
+from scipy import stats
 import matplotlib.pyplot as plt
 
 def load_data(file_path):
@@ -139,7 +140,6 @@ def analyze_data_by_group(df, threshold=0.8, user_id_col="Participant ID", group
 
     return results
 
-
 def take_only_one_culture(df, culture=0):
     """Filter the DataFrame to include only one culture (e.g., German)."""
     return df[df['Nationality'] == culture]
@@ -149,88 +149,73 @@ if __name__ == "__main__":
     data = load_data(file_path)
     valid_users, invalid_users = check_user_validity(data)
 
-    label_map = {
-        # Culture perception (first three)
-        "Which picture best describes the relationship between Pepper and your country? ": "Culture_Country",
-        "Which picture best describes the relationship between Pepper and your national culture? ": "Culture_National",
-        "Which picture best describes the relationship between Pepper and your own preferences? ": "Culture_Preferences",
-
-        # Robot competence / impression (Rosas scale)
-        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ": "Capable",
-        # The next 5 questions are the same text repeated in your CSV; you can map them sequentially
-        # Assuming the columns appear in order for the six competence items:
-        # If you have 6 columns with identical names, pandas will auto-add .1, .2, etc.
-        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1": "Responsive",
-        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2": "Interactive",
-        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3": "Reliable",
-        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4": "Competent",
-        "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5": "Knowledgable"
-    }
-
-
-    print("✅ Valid Users:", valid_users)
-    print("❌ Invalid Users:", invalid_users)
+    cols = ["Which picture best describes the relationship between Pepper and your country? ",
+            "Which picture best describes the relationship between Pepper and your national culture? ",
+            "Which picture best describes the relationship between Pepper and your own preferences? ",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. "
+            ]
 
     # Filter only valid users
     df_valid = data[data["Participant ID"].isin(valid_users)]
-
     cleaned_data = clean_data(df_valid)
 
-    results = analyze_data_with_nationality(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P", nationality_col="Nationality")
+    def perform_f_oneway(df, column="mean_cultural_closeness", group_col="P"):
+        """Perform one-way ANOVA between groups for a specific column."""
+        groups = [df[df[group_col] == g][column].dropna() for g in df[group_col].unique()]
+        f_stat, p_value = stats.f_oneway(*groups)
+        print(f"One-way ANOVA for '{column}' by {group_col}: F-statistic = {f_stat}, p-value = {p_value}\n")
+        # H0: The medians (ranks) of all groups are equal.
+        h_statistic, p_kruskal = stats.kruskal(*groups)
+        print(f"Kruskal-Wallis H-test for '{column}' by {group_col}: H-statistic = {h_statistic}, p-value = {p_kruskal}\n")
 
+    def check_normality(data):
+        if len(data) < 3:
+            return False
+        stat, p = stats.shapiro(data)
+        print(f"Shapiro-Wilk for Group: p-value = {p}")
+        return p > 0.05  # Null hypothesis: data is normally distributed
+    
+    def homogeneity_of_variances(data1, data2):
+        """Check homogeneity of variances using Levene's test."""
+        stat, p = stats.levene(data1, data2)
+        print(f"Levene's test: p-value = {p}")
+        return p > 0.05  # Null hypothesis: equal variances
+    
+    def perform_ttest_by_culture(df, column="mean_cultural_closeness", group_col="P"):
+        """Perform t-tests between groups for a specific column."""
+        p_values = df[group_col].unique()
+        
+        print(f"T-test results for '{column}' by {group_col} values:\n")
+        for i, p1 in enumerate(p_values):
+            for p2 in p_values[i+1:]:
+                group1 = df[df[group_col] == p1][column].dropna()
+                group2 = df[df[group_col] == p2][column].dropna()
+                if len(group1) > 0 and len(group2) > 0:
+                    if (check_normality(group1) and check_normality(group2)) and homogeneity_of_variances(group1, group2):
+                        t_stat, p_value = stats.ttest_ind(group1, group2, equal_var=True)
+                        print(f"{group_col}={p1} vs {group_col}={p2}:")
+                        print(f"  t-statistic: {t_stat:.4f}, p-value: {p_value:.4f}\n")
+                    else:
+                        print(f"Not normal distribution or unequal variances between {group_col}={p1} and {group_col}={p2}.")
+                        # Use Welch's T-test (do not assume equal variances)
+                        ttest_result = stats.ttest_ind(group1, group2, equal_var=False)
+                        print(f"{group_col}={p1} vs {group_col}={p2}:")
+                        print(f"  Welch's t-statistic: {ttest_result.statistic:.4f}, p-value: {ttest_result.pvalue:.4f}\n")
 
-    for (group, nationality), data in results.items():
-        print("=" * 60)
-        print(f"Group {group} | Nationality {nationality}")
+    print("Performing T-tests by culture for 'mean_cultural_closeness':")
+    perform_ttest_by_culture(cleaned_data)
+    perform_f_oneway(cleaned_data, column="mean_cultural_closeness")
+    print("Performing T-tests by culture for 'mean_competence':")
+    perform_ttest_by_culture(cleaned_data, column="mean_competence")
+    perform_f_oneway(cleaned_data, column="mean_competence")
+    for col in cols:
+        print(f"Performing T-tests by culture for '{col}':")
+        perform_ttest_by_culture(cleaned_data, column=col)
+        perform_f_oneway(cleaned_data, column=col)
 
-        #print("\nCorrelation Matrix:")
-        #print(data["correlations"])
-
-        print("\nHighly Correlated Pairs (>|0.8|):")
-        if data["strong_corrs"].empty:
-            print("None found.")
-        else:
-            print(data["strong_corrs"])
-        # Optionally save to CSV
-        data["correlations"].to_csv(f"data_center_group{group}_nat{nationality}_correlations.csv")  
-        data["strong_corrs"].to_csv(f"data_center_group{group}_nat{nationality}_strong_corrs.csv")
-        data["summary"].to_csv(f"data_center_group{group}_nat{nationality}_summary.csv")
-
-        corr_df_short = data["correlations"].rename(columns=label_map, index=label_map)
-        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
-        plt.figure(figsize=(20, 16))
-        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
-        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
-        plt.tight_layout()
-        plt.savefig(f"./data_center_group{group}_nat{nationality}_correlation_heatmap_upper.png", dpi=300)
-        plt.close()
-
-
-
-    results = analyze_data_by_group(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P")
-
-    for group, data in results.items():
-        print("=" * 60)
-        print(f"Group {group}")
-
-        #print("\nCorrelation Matrix:")
-        #print(data["correlations"])
-
-        print("\nHighly Correlated Pairs (>|0.8|):")
-        if data["strong_corrs"].empty:
-            print("None found.")
-        else:
-            print(data["strong_corrs"])
-        # Optionally save to CSV
-        data["correlations"].to_csv(f"data_center_group{group}_correlations.csv") 
-        data["strong_corrs"].to_csv(f"data_center_group{group}_strong_corrs.csv")
-        data["summary"].to_csv(f"data_center_group{group}_summary.csv")
-
-        corr_df_short = data["correlations"].rename(columns=label_map, index=label_map)
-        mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
-        plt.figure(figsize=(20, 16))
-        sns.heatmap(corr_df_short, mask=mask, annot=True, fmt=".1f", cmap="coolwarm", vmin=-1, vmax=1)
-        plt.title("Correlation Matrix Heatmap (Upper Triangle Hidden)")
-        plt.tight_layout()
-        plt.savefig(f"./data_center_group{group}_correlation_heatmap_upper.png", dpi=300)
-        plt.close()
+    
