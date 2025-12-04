@@ -222,7 +222,7 @@ if __name__ == "__main__":
     from DataAnalysis.intro.minorities.minorities import sanitize_filename
     import pandas as pd
 
-    percentages = [0.5, 0.7, 0.9]
+    percentages = [0.1, 0.3, 0.5, 0.7, 0.9]
 
     label_map = {
          # Closeness questions

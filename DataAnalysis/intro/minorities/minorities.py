@@ -160,7 +160,7 @@ if __name__ == "__main__":
         }
 
 
-    for percentage in [0.5, 0.7, 0.9]:
+    for percentage in [0.1, 0.3, 0.5, 0.7, 0.9]:
         for sentence in [
             "Which picture best describes your relationship with Italy or Germany?",
             "Which picture best describes your relationship with Italian or German language?",

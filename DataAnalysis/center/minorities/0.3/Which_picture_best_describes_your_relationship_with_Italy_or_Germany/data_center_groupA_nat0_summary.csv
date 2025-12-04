@@ -1,0 +1,9 @@
+,Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your national culture? ,Which picture best describes the relationship between Pepper and your own preferences? ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_cultural_closeness,mean_competence
+count,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0
+mean,2.4,2.64,2.68,4.52,5.12,5.28,4.28,5.6,4.64,2.5733333333333337,4.582222222222223
+std,1.1902380714238086,1.4106735979665885,1.5737428845483836,2.0024984394500787,2.297099620536007,2.0920484379350937,2.0314198646923454,1.8708286933869707,2.079262689833426,1.2638858363821501,1.664514041960828
+min,1.0,1.0,1.0,2.0,2.0,2.0,2.0,2.0,2.0,1.0,1.8333333333333333
+25%,2.0,2.0,2.0,3.0,3.0,4.0,3.0,5.0,3.0,2.0,3.3333333333333335
+50%,2.0,2.0,2.0,4.0,5.0,5.0,4.0,6.0,4.0,2.3333333333333335,4.5
+75%,3.0,3.0,3.0,6.0,6.0,7.0,6.0,7.0,7.0,3.0,5.388888888888889
+max,5.0,6.0,7.0,8.0,9.0,9.0,8.0,9.0,9.0,6.0,7.833333333333333

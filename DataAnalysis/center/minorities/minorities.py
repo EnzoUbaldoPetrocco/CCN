@@ -157,7 +157,7 @@ if __name__ == "__main__":
     import os
     import pandas as pd
 
-    percentages = [0.5, 0.7, 0.9]
+    percentages = [0.1, 0.3, 0.5, 0.7, 0.9]
     file_path = "../Center CCN (Risposte).csv"
     data = load_data(file_path)
     valid_users, invalid_users = check_user_validity(data)

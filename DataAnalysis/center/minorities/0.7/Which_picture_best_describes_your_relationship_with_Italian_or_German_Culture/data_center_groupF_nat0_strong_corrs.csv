@@ -1,10 +1,10 @@
 ,,0
 Which picture best describes the relationship between Pepper and your national culture? ,mean_cultural_closeness,0.9825477402068582
 mean_cultural_closeness,Which picture best describes the relationship between Pepper and your national culture? ,0.9825477402068582
-Which picture best describes the relationship between Pepper and your own preferences? ,mean_cultural_closeness,0.9589937355598662
 mean_cultural_closeness,Which picture best describes the relationship between Pepper and your own preferences? ,0.9589937355598662
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.9458113702861561
+Which picture best describes the relationship between Pepper and your own preferences? ,mean_cultural_closeness,0.9589937355598662
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.9458113702861561
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.9458113702861561
 mean_cultural_closeness,Which picture best describes the relationship between Pepper and your country? ,0.9427853907335024
 Which picture best describes the relationship between Pepper and your country? ,mean_cultural_closeness,0.9427853907335024
 Which picture best describes the relationship between Pepper and your own preferences? ,Which picture best describes the relationship between Pepper and your national culture? ,0.9393693087187431
@@ -13,7 +13,7 @@ Which picture best describes the relationship between Pepper and your country? ,
 Which picture best describes the relationship between Pepper and your national culture? ,Which picture best describes the relationship between Pepper and your country? ,0.8935464156105121
 Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your own preferences? ,0.8267716535433071
 Which picture best describes the relationship between Pepper and your own preferences? ,Which picture best describes the relationship between Pepper and your country? ,0.8267716535433071
-Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,mean_competence,0.8100123237102708
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.8100123237102708
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,mean_competence,0.8100123237102708
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.8021670689598528
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_competence,0.8021670689598528

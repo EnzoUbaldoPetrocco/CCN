@@ -1,0 +1,19 @@
+,,0
+Which picture best describes the relationship between Pepper and your country? ,mean_cultural_closeness,0.9403453653554481
+mean_cultural_closeness,Which picture best describes the relationship between Pepper and your country? ,0.9403453653554481
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,0.9177345843981556
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_competence,0.9177345843981556
+Which picture best describes the relationship between Pepper and your national culture? ,mean_cultural_closeness,0.8938255854745617
+mean_cultural_closeness,Which picture best describes the relationship between Pepper and your national culture? ,0.8938255854745617
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,0.8464140688047188
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2,mean_competence,0.8464140688047188
+Which picture best describes the relationship between Pepper and your national culture? ,Which picture best describes the relationship between Pepper and your country? ,0.846034655788964
+Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your national culture? ,0.846034655788964
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8367839292201414
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,mean_competence,0.8367839292201414
+mean_cultural_closeness,Which picture best describes the relationship between Pepper and your own preferences? ,0.8348908331902085
+Which picture best describes the relationship between Pepper and your own preferences? ,mean_cultural_closeness,0.8348908331902085
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,mean_competence,0.82750353073637
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.82750353073637
+Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,mean_competence,0.8171719781694083
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,0.8171719781694083

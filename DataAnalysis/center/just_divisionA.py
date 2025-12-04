@@ -4,6 +4,7 @@ import math
 import seaborn as sns
 from scipy import stats
 import matplotlib.pyplot as plt
+import pingouin as pg
 
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""

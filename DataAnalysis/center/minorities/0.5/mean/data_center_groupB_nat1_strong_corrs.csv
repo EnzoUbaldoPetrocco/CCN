@@ -3,13 +3,13 @@ mean_competence,Please rate your impression of the robot you just interacted wit
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5,mean_competence,0.9358242367240589
 Which picture best describes the relationship between Pepper and your country? ,mean_cultural_closeness,0.9225215098294228
 mean_cultural_closeness,Which picture best describes the relationship between Pepper and your country? ,0.9225215098294228
-Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your national culture? ,0.877955284330257
 Which picture best describes the relationship between Pepper and your national culture? ,Which picture best describes the relationship between Pepper and your country? ,0.877955284330257
+Which picture best describes the relationship between Pepper and your country? ,Which picture best describes the relationship between Pepper and your national culture? ,0.877955284330257
 mean_cultural_closeness,Which picture best describes the relationship between Pepper and your national culture? ,0.865651488520295
 Which picture best describes the relationship between Pepper and your national culture? ,mean_cultural_closeness,0.865651488520295
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,mean_competence,0.8172189829561692
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3,0.8172189829561692
-mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,0.8132471859708448
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,mean_competence,0.8132471859708448
+mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1,0.8132471859708448
 mean_competence,Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,0.8123202195382827
 Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ,mean_competence,0.8123202195382827

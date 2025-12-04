@@ -204,7 +204,7 @@ if __name__ == "__main__":
         print(f"Kruskal-Wallis H-test for '{column}' by {group_col}: H-statistic = {h_statistic}, p-value = {p_kruskal}\n")
 
 
-    for threshold in [0.5, 0.7, 0.9]:
+    for threshold in [0.1, 0.3, 0.5, 0.7, 0.9]:
         for directory in ["mean"]:  # Add other directories as needed
             print(f"\n=== Processing threshold={threshold}, directory={directory} ===")
             subdirectory = f"./{threshold}/{directory}/"
