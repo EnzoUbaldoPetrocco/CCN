@@ -236,6 +236,22 @@ if __name__ == "__main__":
         # Convert wide back to long for pingouin (with complete cases only)
         long_complete = wide.reset_index().melt(id_vars=subject_col, var_name=within_col, value_name=column)
 
+        scores_f = long_complete[long_complete[within_col] == 'F'][column]
+        scores_b = long_complete[long_complete[within_col] == 'B'][column]
+        scores_a = long_complete[long_complete[within_col] == 'A'][column]
+        shapiro_f = stats.shapiro(scores_f)
+        shapiro_b = stats.shapiro(scores_b)
+        shapiro_a = stats.shapiro(scores_a)
+
+        print("Shapiro-Wilk normality test results:")
+        print(f"Group P=F: p-value = {shapiro_f.pvalue:.4f}")
+        print(f"Group P=B: p-value = {shapiro_b.pvalue:.4f}")
+        print(f"Group P=A: p-value = {shapiro_a.pvalue:.4f}")
+        print("-" * 50)
+
+
+        
+
         # Repeated-measures ANOVA using pingouin
         try:
             aov = pg.rm_anova(data=long_complete, dv=column, within=within_col, subject=subject_col, detailed=True)
@@ -265,7 +281,7 @@ if __name__ == "__main__":
 
         # Pairwise paired t-tests with Bonferroni correction (pingouin)
         try:
-            pairwise = pg.pairwise_ttests(data=long_complete, dv=column, within=within_col, subject=subject_col, padjust='bonf')
+            pairwise = pg.pairwise_tests(data=long_complete, dv=column, within=within_col, subject=subject_col, padjust='bonf')
             print("\nPaired t-tests with Bonferroni correction:")
             for _, prow in pairwise.iterrows():
                 A = prow.get('A')
