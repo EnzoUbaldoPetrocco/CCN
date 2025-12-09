@@ -3,6 +3,72 @@ import numpy as np
 import math
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
+
+label_map = {
+         # Closeness questions
+            "Which picture best describes your relationship with Italy or Germany?": "Closeness_Country",
+            "Which picture best describes your relationship with Italian or German language?": "Closeness_Language",
+            "Which picture best describes your relationship with Italian or German Culture?": "Closeness_Culture",
+
+            # Personality (OCEAN 10)
+            "I see myself as someone who  [... is reserved ]": "Reserved",
+            "I see myself as someone who  [... is generally trusting]": "Trusting",
+            "I see myself as someone who  [... tends to be lazy]": "Lazy",
+            "I see myself as someone who  [... is relaxed, handles stress well]": "Relaxed",
+            "I see myself as someone who  [... has few artistic interests]": "Artistic",
+            "I see myself as someone who  [... is ongoing, sociable]": "Sociable",
+            "I see myself as someone who  [... tends to find fault with others]": "Critical",
+            "I see myself as someone who  [... does a thorough job]": "Thorough",
+            "I see myself as someone who  [... get nervous easily]": "Neurotic",
+            "I see myself as someone who  [... has active imagination]": "Imaginative",
+
+            # Trust in Technology (Trust 14 items)
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Function successfully]": "Function",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Act consistenly]": "Consistent",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Reliable]": "Reliable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Predictable]": "Predictable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Dependable]": "Dependable",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Follow directions]": "Follow_Directions",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Meet the needs of the mission]": "Mission",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Perform exactly as instructed]": "Perform",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]": "Errors",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide appropriate information]": "Info",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]": "Malfunction",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Communicate with people]": "Communicate",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide Feedback]": "Feedback",
+            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Unresponsive]": "Unresponsive",
+
+            # Culture perception (first three)
+            "Which picture best describes the relationship between Pepper and your country? ": "Culture_Country",
+            "Which picture best describes the relationship between Pepper and your national culture? ": "Culture_National",
+            "Which picture best describes the relationship between Pepper and your own preferences? ": "Culture_Preferences",
+
+            # Robot competence / impression (Rosas scale)
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ": "Capable",
+            # The next 5 questions are the same text repeated in your CSV; you can map them sequentially
+            # Assuming the columns appear in order for the six competence items:
+            # If you have 6 columns with identical names, pandas will auto-add .1, .2, etc.
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1": "Responsive",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2": "Interactive",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3": "Reliable",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4": "Competent",
+            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5": "Knowledgable"
+    }
+    
+label_to_keep = [
+    "Which picture best describes your relationship with Italy or Germany?",
+    "Which picture best describes your relationship with Italian or German language?",
+    "Which picture best describes your relationship with Italian or German Culture?",
+    "mean_cultural_closeness_subj",
+    "mean_personality_subj",
+    "mean_trust_subj",
+    "mean_cultural_closeness",
+    "mean_competence",
+    "Participant ID",
+    "P",
+    "Nationality"
+    ]
 
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
@@ -172,13 +238,15 @@ def analyze_data_by_group(df, threshold=0.8, user_id_col="Participant ID", group
         correlated_pairs = correlated_pairs[correlated_pairs.abs() < 1]  # remove self-corr
         strong_corrs = correlated_pairs[correlated_pairs > threshold]
 
+        
+
         # Save results
         results[p_value] = {
             "correlations": correlations,
             "strong_corrs": strong_corrs,
             "summary": subset_summary
         }
-# Summary stats
+        # Summary stats
         subset_summary = subset.describe(include='all')
 
         subset.to_csv(f"subset_group{p_value}.csv")
@@ -204,6 +272,133 @@ def analyze_data_by_group(df, threshold=0.8, user_id_col="Participant ID", group
 
     return results
 
+def annotate_with_stars(r_val, p_val):
+    """
+    Formats the correlation coefficient (r) with significance stars based on the p-value.
+    
+    * p < 0.05
+    ** p < 0.01
+    *** p < 0.001
+    """
+    stars = ""
+    # pd.isna handles both np.nan and pd.NA
+    if pd.isna(r_val) or pd.isna(p_val):
+        return ""
+        
+    if p_val < 0.001:
+        stars = "***"
+    elif p_val < 0.01:
+        stars = "**"
+    elif p_val < 0.05:
+        stars = "*"
+    
+    # Format the r-value to two decimal places and append stars
+    return f"{r_val:.2f}{stars}"
+
+def generate_grouped_correlation_heatmaps(df, group_col="P"):
+    """
+    Calculates Pearson correlation coefficients and p-values for each unique 
+    group defined in 'group_col', and generates a heatmap for each.
+    
+    Args:
+        df (pd.DataFrame): The input DataFrame containing all data.
+        group_col (str): The column name used for grouping (e.g., 'P').
+    """
+    df = df[label_to_keep]  # Drop rows that are completely empty
+    for p_value in df[group_col].unique():
+        # 1. Subsetting and Preprocessing
+        print(f"\n--- Processing Group: {p_value} ---")
+        subset = df[df[group_col] == p_value].copy()
+        
+        # Drop specified non-feature columns
+        subset = subset.drop(columns=["Participant ID", group_col, "Nationality"], errors="ignore")
+
+        if subset.empty:
+            print(f"Skipping group {p_value}: No data remaining.")
+            continue
+            
+        # Ensure all columns are numeric for correlation calculation
+        numeric_subset = subset.select_dtypes(include=[np.number])
+        if numeric_subset.shape[1] < 2:
+            print(f"Skipping group {p_value}: Less than two numeric columns remaining.")
+            continue
+
+        # Use only the columns that are present in the numeric subset
+        cols = numeric_subset.columns
+        
+        # 2. Calculate Correlation and P-value Matrices
+        
+        # A. Calculate R-Matrix (Correlation Coefficients) using pandas built-in corr
+        # This is much faster than looping for R values.
+        r_matrix = numeric_subset.corr(method='pearson')
+        
+        # B. Calculate P-Matrix (P-values) using scipy.stats.pearsonr
+        p_matrix = pd.DataFrame(index=cols, columns=cols, dtype=float)
+        
+        for col1 in cols:
+            for col2 in cols:
+                # Correlation is symmetric, only need to calculate once per pair
+                if col1 == col2:
+                    r_matrix.loc[col1, col2] = 1.0
+                    p_matrix.loc[col1, col2] = 0.0
+                elif pd.isna(p_matrix.loc[col1, col2]):
+                    # Drop NaNs for the specific pair calculation
+                    valid_data = numeric_subset[[col1, col2]].dropna()
+                    
+                    if len(valid_data) >= 2:
+                        try:
+                            corr, p = pearsonr(valid_data[col1], valid_data[col2])
+                            
+                            # Store results symmetrically
+                            p_matrix.loc[col1, col2] = p
+                            p_matrix.loc[col2, col1] = p
+                        except Exception as e:
+                            # Handle cases where calculation fails (e.g., zero variance)
+                            p_matrix.loc[col1, col2] = np.nan
+                            p_matrix.loc[col2, col1] = np.nan
+                    else:
+                        p_matrix.loc[col1, col2] = np.nan
+                        p_matrix.loc[col2, col1] = np.nan
+
+        # 3. Prepare Annotation Strings
+        # Create a DataFrame of formatted strings (r + stars) for annotations
+        annotation_df = r_matrix.copy()
+        for i in cols:
+            for j in cols:
+                annotation_df.loc[i, j] = annotate_with_stars(r_matrix.loc[i, j], p_matrix.loc[i, j])
+
+        print(f"R-Matrix:\n{r_matrix.round(3).head(3)}")
+        print(f"Annotation Matrix:\n{annotation_df.head(3)}")
+
+        # 4. Generate Heatmap
+        
+        # Mask the upper triangle
+        mask = np.triu(np.ones_like(r_matrix, dtype=bool))
+        r_matrix = r_matrix.rename(columns=label_map, index=label_map)
+        plt.figure(figsize=(12, 10))
+        sns.heatmap(
+            r_matrix,            # 1. Numeric data for colors (R values)
+            mask=mask,
+            annot=annotation_df, # 2. String data for annotation text (R + Stars)
+            fmt='s',             # IMPORTANT: Format as string ('s') to allow stars in annotation
+            cmap="coolwarm",
+            vmin=-1,
+            vmax=1,
+            linewidths=0.5,
+            linecolor='white',
+            cbar_kws={'label': 'Pearson Correlation Coefficient (r)'}
+        )
+        
+        title = f"Pearson Correlation Heatmap for Group: {p_value}"
+        plt.title(title, fontsize=16)
+        plt.tight_layout()
+        
+        # Save the figure
+        filename = f"./Pearson_Correlation_Heatmap_{p_value}.png"
+        plt.savefig(filename, dpi=300)
+        plt.close()
+
+        print(f"Successfully generated and saved: {filename}")
 
 def take_only_one_culture(df, culture=0):
     """Filter the DataFrame to include only one culture (e.g., German)."""
@@ -213,56 +408,6 @@ if __name__ == "__main__":
     file_path_center = "../center/Center CCN (Risposte).csv"
     file_path_intro = "../intro/Intro CCN  (Risposte).CSV"
 
-    label_map = {
-         # Closeness questions
-            "Which picture best describes your relationship with Italy or Germany?": "Closeness_Country",
-            "Which picture best describes your relationship with Italian or German language?": "Closeness_Language",
-            "Which picture best describes your relationship with Italian or German Culture?": "Closeness_Culture",
-
-            # Personality (OCEAN 10)
-            "I see myself as someone who  [... is reserved ]": "Reserved",
-            "I see myself as someone who  [... is generally trusting]": "Trusting",
-            "I see myself as someone who  [... tends to be lazy]": "Lazy",
-            "I see myself as someone who  [... is relaxed, handles stress well]": "Relaxed",
-            "I see myself as someone who  [... has few artistic interests]": "Artistic",
-            "I see myself as someone who  [... is ongoing, sociable]": "Sociable",
-            "I see myself as someone who  [... tends to find fault with others]": "Critical",
-            "I see myself as someone who  [... does a thorough job]": "Thorough",
-            "I see myself as someone who  [... get nervous easily]": "Neurotic",
-            "I see myself as someone who  [... has active imagination]": "Imaginative",
-
-            # Trust in Technology (Trust 14 items)
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Function successfully]": "Function",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Act consistenly]": "Consistent",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Reliable]": "Reliable",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Predictable]": "Predictable",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Dependable]": "Dependable",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Follow directions]": "Follow_Directions",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Meet the needs of the mission]": "Mission",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Perform exactly as instructed]": "Perform",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Have errors]": "Errors",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide appropriate information]": "Info",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Malfunction]": "Malfunction",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Communicate with people]": "Communicate",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Provide Feedback]": "Feedback",
-            "Consider expectations toward Pepper robot and express how much do you agree with the properties attributed to it (scale: 0%-100%, scroll in to see all the options).  [Unresponsive]": "Unresponsive",
-
-            # Culture perception (first three)
-            "Which picture best describes the relationship between Pepper and your country? ": "Culture_Country",
-            "Which picture best describes the relationship between Pepper and your national culture? ": "Culture_National",
-            "Which picture best describes the relationship between Pepper and your own preferences? ": "Culture_Preferences",
-
-            # Robot competence / impression (Rosas scale)
-            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. ": "Capable",
-            # The next 5 questions are the same text repeated in your CSV; you can map them sequentially
-            # Assuming the columns appear in order for the six competence items:
-            # If you have 6 columns with identical names, pandas will auto-add .1, .2, etc.
-            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .1": "Responsive",
-            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .2": "Interactive",
-            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .3": "Reliable",
-            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .4": "Competent",
-            "Please rate your impression of the robot you just interacted with by selecting a point on the scale between the two adjectives. There are no right or wrong answers. .5": "Knowledgable"
-    }
     
     data_intro = load_data(file_path_intro)
     data_center = load_data(file_path_center)
@@ -340,3 +485,10 @@ if __name__ == "__main__":
         plt.tight_layout()
         plt.savefig(f"./data_center_group{group}_correlation_heatmap_upper.png", dpi=300)
         plt.close()
+
+    print("--- Data Snapshot Before Processing ---")
+    print(cleaned_data.head())
+    print("-" * 50)
+
+    # Run the analysis function
+    generate_grouped_correlation_heatmaps(cleaned_data, group_col="P")
