@@ -4,6 +4,7 @@ import math
 import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy.stats import pearsonr
+from sklearn import preprocessing
 
 label_map = {
          # Closeness questions
@@ -61,13 +62,18 @@ label_to_keep = [
     "Which picture best describes your relationship with Italian or German language?",
     "Which picture best describes your relationship with Italian or German Culture?",
     "mean_cultural_closeness_subj",
-    "mean_personality_subj",
+    "extraversion",
+    "agreebleness",
+    "coscientiousness",
+    "neuroticism",
+    "openness",
     "mean_trust_subj",
     "mean_cultural_closeness",
     "mean_competence",
     "Participant ID",
     "P",
-    "Nationality"
+    "Nationality",
+    "Delta_Type"
     ]
 
 def load_data(file_path):
@@ -129,7 +135,7 @@ def clean_data_intro(df):
     #df = df.drop(df.columns[1], axis=1)
     
     df["mean_cultural_closeness_subj"] = df.iloc[:, 2:5].mean(axis=1)
-    df["mean_personality_subj"] = df.iloc[:, 5:15].mean(axis=1)
+    #df["mean_personality_subj"] = df.iloc[:, 5:15].mean(axis=1)
     df["extraversion"] = df.iloc[:, 10] - df.iloc[:, 5]
     df["agreebleness"] = df.iloc[:, 6] - df.iloc[:, 11]
     df["coscientiousness"] = df.iloc[:, 12] - df.iloc[:, 7]
@@ -138,6 +144,12 @@ def clean_data_intro(df):
     temp = (df.iloc[:, 15:23].mean(axis=1) + df.iloc[:,24] + df.iloc[:, 26:28].mean(axis=1))/11
     temp2 = (df.iloc[:, 23] + df.iloc[:, 25] + df.iloc[:, 28])/3
     df["mean_trust_subj"] = (temp + temp2)/2
+
+    for column in df.columns:
+        if column != "Participant ID" and column != "Nationality":
+            scaler = preprocessing.StandardScaler()
+            if pd.api.types.is_numeric_dtype(df[column]):
+                df[column] = scaler.fit_transform(df[[column]])
     return df
 
 def clean_data_center(df):
@@ -165,6 +177,11 @@ def clean_data_center(df):
     # Mean of last 6 values per row
     df["mean_competence"] = df.iloc[:, -6:].mean(axis=1)
     #df = df.drop(df.columns[1], axis=1)
+    for column in df.columns:
+        if column != "Participant ID" and column != "Nationality":
+            scaler = preprocessing.StandardScaler()
+            if pd.api.types.is_numeric_dtype(df[column]):
+                df[column] = scaler.fit_transform(df[[column]])
     return df
 
 def analyze_data_with_nationality(df, threshold=0.8, user_id_col="Participant ID", group_col="P", nationality_col="Nationality"):
@@ -295,7 +312,7 @@ def annotate_with_stars(r_val, p_val):
     # Format the r-value to two decimal places and append stars
     return f"{r_val:.2f}{stars}"
 
-def generate_grouped_correlation_heatmaps(df, group_col="P"):
+def generate_grouped_correlation_heatmaps(df, group_col="P", pt=""):
     """
     Calculates Pearson correlation coefficients and p-values for each unique 
     group defined in 'group_col', and generates a heatmap for each.
@@ -304,7 +321,7 @@ def generate_grouped_correlation_heatmaps(df, group_col="P"):
         df (pd.DataFrame): The input DataFrame containing all data.
         group_col (str): The column name used for grouping (e.g., 'P').
     """
-    df = df[label_to_keep]  # Drop rows that are completely empty
+    df = df[[col for col in label_to_keep if col in df.columns]].copy()
     for p_value in df[group_col].unique():
         # 1. Subsetting and Preprocessing
         print(f"\n--- Processing Group: {p_value} ---")
@@ -394,7 +411,7 @@ def generate_grouped_correlation_heatmaps(df, group_col="P"):
         plt.tight_layout()
         
         # Save the figure
-        filename = f"./Pearson_Correlation_Heatmap_{p_value}.png"
+        filename = f"./{pt}Pearson_Correlation_Heatmap_{p_value}.png"
         plt.savefig(filename, dpi=300)
         plt.close()
 
@@ -404,9 +421,13 @@ def take_only_one_culture(df, culture=0):
     """Filter the DataFrame to include only one culture (e.g., German)."""
     return df[df['Nationality'] == culture]
 
+     
+
 if __name__ == "__main__":
     file_path_center = "../center/Center CCN (Risposte).csv"
     file_path_intro = "../intro/Intro CCN  (Risposte).CSV"
+
+    
 
     
     data_intro = load_data(file_path_intro)
@@ -417,8 +438,9 @@ if __name__ == "__main__":
     # Filter only valid users
     df_valid = data_center[data_center["Participant ID"].isin(valid_users)]
     cleaned_data_center = clean_data_center(df_valid)
-    
     cleaned_data_intro = clean_data_intro(data_intro)
+    center_copy = cleaned_data_center.copy()
+    intro_copy = cleaned_data_intro.copy()
     
     cleaned_data = merge_data(cleaned_data_intro, cleaned_data_center, on="Participant ID")
 
@@ -492,3 +514,82 @@ if __name__ == "__main__":
 
     # Run the analysis function
     generate_grouped_correlation_heatmaps(cleaned_data, group_col="P")
+
+    generate_grouped_correlation_heatmaps(cleaned_data, group_col="Nationality")
+
+    for nat in [0, 1]:
+        deltas_nat = take_only_one_culture(cleaned_data, culture=nat)
+        path_prefix = "DE" if nat == 0 else "IT"
+        print("Path prefix: ", path_prefix)
+        generate_grouped_correlation_heatmaps(deltas_nat, group_col="P", pt=path_prefix)
+
+
+
+    ########################################################################
+    ######################## DELTAS ANALYSIS  ################################
+    ########################################################################
+
+    # Calculate deltas for each user between P=A and P=F and P=B and P=F
+    deltas_AF = []
+    deltas_AB = []
+    deltas_FB = []
+    for user in valid_users:
+        print(f"Processing deltas for user: {user}")
+        user_data = center_copy[center_copy["Participant ID"] == user]
+        data_A = user_data[user_data["P"] == "A"]
+        data_B = user_data[user_data["P"] == "B"]
+        data_F = user_data[user_data["P"] == "F"]
+
+        if not data_A.empty and not data_B.empty:
+            delta_AB = data_A.iloc[0].drop(["Informazioni cronologiche", "Nationality", "Participant ID", "P"], errors="ignore") - data_B.iloc[0].drop(["Informazioni cronologiche","Nationality", "Participant ID", "P"], errors="ignore")
+            with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+                print(f"Delta AF for user {user}:\n{delta_AB}")
+            delta_AB["Participant ID"] = user
+            delta_AB["Delta_Type"] = "A-B"
+            deltas_AB.append(delta_AB)
+
+        if not data_F.empty and not data_B.empty:
+            delta_FB = data_F.iloc[0].drop(["Informazioni cronologiche","Nationality", "Participant ID", "P"], errors="ignore") - data_B.iloc[0].drop(["Informazioni cronologiche","Nationality", "Participant ID", "P"], errors="ignore")
+            delta_FB["Participant ID"] = user
+            delta_FB["Delta_Type"] = "F-B"
+            deltas_FB.append(delta_FB)
+
+        if not data_A.empty and not data_F.empty:
+            delta_AF = data_A.iloc[0].drop(["Informazioni cronologiche","Nationality", "Participant ID", "P"], errors="ignore") - data_F.iloc[0].drop(["Informazioni cronologiche","Nationality", "Participant ID", "P"], errors="ignore")
+            delta_AF["Participant ID"] = user
+            delta_AF["Delta_Type"] = "A-F"
+            deltas_AF.append(delta_AF)
+
+        
+    deltas_df_AB_center = pd.DataFrame(deltas_AB)
+    deltas_df_FB_center = pd.DataFrame(deltas_FB)
+    deltas_df_AF_center = pd.DataFrame(deltas_AF)
+    deltas_df_AB = merge_data(deltas_df_AB_center, intro_copy, on="Participant ID")
+    deltas_df_FB = merge_data(deltas_df_FB_center, intro_copy, on="Participant ID")
+    deltas_df_AF = merge_data(deltas_df_AF_center, intro_copy, on="Participant ID")
+
+    #deltas = merge_data(deltas_df_AB, deltas_df_FB, on="Participant ID")
+
+    generate_grouped_correlation_heatmaps(deltas_df_AB, group_col="Delta_Type", pt="AB/")
+    generate_grouped_correlation_heatmaps(deltas_df_FB, group_col="Delta_Type", pt="FB/")
+    generate_grouped_correlation_heatmaps(deltas_df_AF, group_col="Delta_Type", pt="AF/")
+    # Run the analysis function on deltas
+
+    for nat in [0, 1]:
+        deltas_nat_FB = take_only_one_culture(deltas_df_FB, culture=nat)
+        path_prefix = "FB/DE/" if nat == 0 else "FB/IT/"
+        print("Path prefix: ", path_prefix)
+        generate_grouped_correlation_heatmaps(deltas_nat_FB, group_col="Delta_Type", pt=path_prefix)
+
+    for nat in [0, 1]:
+        deltas_nat_AF = take_only_one_culture(deltas_df_AF, culture=nat)
+        path_prefix = "AF/DE/" if nat == 0 else "AF/IT/"
+        generate_grouped_correlation_heatmaps(deltas_nat_AF, group_col="Delta_Type", pt=path_prefix)
+
+    for nat in [0, 1]:
+        deltas_nat_AB = take_only_one_culture(deltas_df_AB, culture=nat)
+        path_prefix = "AB/DE/" if nat == 0 else "AB/IT/"
+        generate_grouped_correlation_heatmaps(deltas_nat_AB, group_col="Delta_Type", pt=path_prefix)
+
+    
+    
