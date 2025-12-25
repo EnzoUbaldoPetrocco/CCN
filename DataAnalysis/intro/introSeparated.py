@@ -109,6 +109,15 @@ label_to_keep = [
     ]
 
 
+def convert2latex(df, title):
+    latex_code = df.to_latex(index=False, 
+                         caption=title, 
+                         label=f"tab:{title}",
+                         column_format='lcr') # Alignment: left, center, right
+    with open(f'{title}.tex', 'w') as f:
+        f.write(latex_code)
+    return
+
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
     return pd.read_csv(file_path)

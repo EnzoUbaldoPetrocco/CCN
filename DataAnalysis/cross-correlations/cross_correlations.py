@@ -80,6 +80,15 @@ def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
     return pd.read_csv(file_path)
 
+def convert2latex(df, title):
+    latex_code = df.to_latex(index=False, 
+                         caption=title, 
+                         label=f"tab:{title}",
+                         column_format='lcr') # Alignment: left, center, right
+    with open(f'{title}.tex', 'w') as f:
+        f.write(latex_code)
+    return
+
 def merge_data(df1, df2, on="Participant ID"):
     """Merge two DataFrames on a specified column."""
     df = pd.merge(df1, df2, on=on)
@@ -202,6 +211,7 @@ def analyze_data_with_nationality(df, threshold=0.8, user_id_col="Participant ID
             subset_summary = subset.describe(include='all')
 
             subset.to_csv(f"subset_group{p_value}_nat{n_value}.csv")
+            convert2latex(subset, f"subset_group{p_value}_nat{n_value}")
 
             # Correlation matrix
             correlations = subset.corr()
@@ -242,6 +252,7 @@ def analyze_data_by_group(df, threshold=0.8, user_id_col="Participant ID", group
         subset_summary = subset.describe(include='all')
 
         subset.to_csv(f"subset_group{p_value}.csv")
+        convert2latex(subset, f"subset_group{p_value}")
 
         # Correlation matrix
         correlations = subset.corr()
@@ -267,6 +278,7 @@ def analyze_data_by_group(df, threshold=0.8, user_id_col="Participant ID", group
         subset_summary = subset.describe(include='all')
 
         subset.to_csv(f"subset_group{p_value}.csv")
+        convert2latex(subset, f"subset_group{p_value}")
 
         # Correlation matrix
         correlations = subset.corr()
@@ -447,6 +459,7 @@ if __name__ == "__main__":
     print(cleaned_data.iloc[0])
 
     cleaned_data.to_csv("all.csv")
+    convert2latex(cleaned_data, f"all")
     
     results = analyze_data_with_nationality(cleaned_data, threshold=0.8, user_id_col="Participant ID", group_col="P", nationality_col="Nationality")
 
@@ -466,6 +479,9 @@ if __name__ == "__main__":
         data["correlations"].to_csv(f"group{group}_nat{nationality}_correlations.csv")  
         data["strong_corrs"].to_csv(f"group{group}_nat{nationality}_strong_corrs.csv")
         data["summary"].to_csv(f"group{group}_nat{nationality}_summary.csv")
+        convert2latex(data["correlations"], f"group{group}_nat{nationality}_correlations")
+        convert2latex(data["strong_corrs"], f"group{group}_nat{nationality}_strong_corrs")
+        convert2latex(data["summary"], f"group{group}_nat{nationality}_summary")
 
         if data["correlations"].empty:
             continue
@@ -496,6 +512,10 @@ if __name__ == "__main__":
         data["correlations"].to_csv(f"group{group}_correlations.csv")  
         data["strong_corrs"].to_csv(f"group{group}_strong_corrs.csv")
         data["summary"].to_csv(f"group{group}_summary.csv")
+        
+        convert2latex(data["correlations"], f"group{group}_correlations")
+        convert2latex(data["strong_corrs"], f"group{group}_strong_corrs")
+        convert2latex(data["summary"], f"group{group}_summary")
 
         if data["correlations"].empty:
             continue

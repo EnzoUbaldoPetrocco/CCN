@@ -74,6 +74,15 @@ label_to_keep = [
     ]
 
 
+def convert2latex(df, title):
+    latex_code = df.to_latex(index=False, 
+                         caption=title, 
+                         label=f"tab:{title}",
+                         column_format='lcr') # Alignment: left, center, right
+    with open(f'{title}.tex', 'w') as f:
+        f.write(latex_code)
+    return
+
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
     return pd.read_csv(file_path)
@@ -319,9 +328,11 @@ if __name__ == "__main__":
     #print("Data Summary:")
     #print(summary)
     summary.to_csv("data_intro_summary.csv")
+    convert2latex(summary, "data_intro_summary")
     #print("\nCorrelations:")
     #print(correlations)
     correlations.to_csv("data_intro_correlations.csv")
+    convert2latex(correlations, "data_intro_correlations")
     print("\nStrong Correlations (>|0.8|):")
     print(strong_corrs)
 
@@ -331,9 +342,11 @@ if __name__ == "__main__":
     #print("\nGerman Data Summary:")
     #print(german_summary)
     german_summary.to_csv("data_intro_german_summary.csv")
+    convert2latex(german_summary, "data_intro_german_summary")
     #print("\nGerman Correlations:")
     #print(german_correlations)
     german_correlations.to_csv("data_intro_german_correlations.csv")
+    convert2latex(german_correlations, "data_intro_german_correlations")
     print("\nStrong Correlations in German Data (>|0.8|):")
     print(german_strong_corrs)
 
@@ -353,9 +366,11 @@ if __name__ == "__main__":
     #print("\nItalian Data Summary:")
     #print(italian_summary)
     italian_summary.to_csv("data_intro_italian_summary.csv")
+    convert2latex(italian_summary, "data_intro_italian_summary")
     #print("\nItalian Correlations:")
     #print(italian_correlations)
     italian_correlations.to_csv("data_intro_italian_correlations.csv")
+    convert2latex(italian_correlations, "data_intro_italian_correlations")
     print("\nStrong Correlations in Italian Data (>|0.8|):")
     print(italian_strong_corrs)
 

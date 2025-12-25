@@ -1,5 +1,14 @@
 
 robot_info.json
 gopro_demo.log
+__pycache__/
+DataAnalysis/cross-correlations/__pycache__/
+DataAnalysis/intro/__pycache__/
+DataAnalysis/center/__pycache__/
+DataAnalysis/center/Center CCN (Risposte).xlsx
+DataAnalysis/center/Center CCN (Risposte).csv
+DataAnalysis/cross-correlations/all.csv
+DataAnalysis/intro/Intro CCN (Risposte).csv
+DataAnalysis/intro/Intro CCN (Risposte).xlsx
 
 *.pyc

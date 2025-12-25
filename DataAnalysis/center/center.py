@@ -63,6 +63,18 @@ def clean_data(df):
     #df = df.drop(df.columns[1], axis=1)
     return df
 
+def convert2latex(df, title):
+    latex_code = df.to_latex(index=False, 
+                         caption=title, 
+                         label="tab:data_summary",
+                         column_format='lcr') # Alignment: left, center, right
+
+    # 3. Save to a .tex file
+    with open(f'{title}.tex', 'w') as f:
+        f.write(latex_code)
+
+    return
+
 def analyze_data_with_nationality(df, threshold=0.8, user_id_col="Participant ID", group_col="P", nationality_col="Nationality"):
     """Perform correlations by P and nationality, excluding user ID."""
     results = {}
@@ -195,6 +207,9 @@ if __name__ == "__main__":
         data["correlations"].to_csv(f"data_center_group{group}_nat{nationality}_correlations.csv")  
         data["strong_corrs"].to_csv(f"data_center_group{group}_nat{nationality}_strong_corrs.csv")
         data["summary"].to_csv(f"data_center_group{group}_nat{nationality}_summary.csv")
+        convert2latex(data["correlations"], f"data_center_group{group}_nat{nationality}_correlations")
+        convert2latex(data["strong_corrs"], f"data_center_group{group}_nat{nationality}_strong_corrs")
+        convert2latex(data["summary"], f"data_center_group{group}_nat{nationality}_summary")
 
         corr_df_short = data["correlations"].rename(columns=label_map, index=label_map)
         mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
@@ -225,6 +240,9 @@ if __name__ == "__main__":
         data["correlations"].to_csv(f"data_center_group{group}_correlations.csv") 
         data["strong_corrs"].to_csv(f"data_center_group{group}_strong_corrs.csv")
         data["summary"].to_csv(f"data_center_group{group}_summary.csv")
+        convert2latex(data["correlations"], f"data_center_group{group}_correlations")
+        convert2latex(data["strong_corrs"], f"data_center_group{group}_strong_corrs")
+        convert2latex(data["summary"], f"data_center_group{group}_summary")
 
         corr_df_short = data["correlations"].rename(columns=label_map, index=label_map)
         mask = np.triu(np.ones_like(corr_df_short, dtype=bool))
