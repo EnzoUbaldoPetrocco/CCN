@@ -1,0 +1,26 @@
+[
+    {
+        "id":"a94aa824-023e-4ea5-b19d-759d1e0c89d0",
+        "mean_cultural_closeness_subj":0.3333333333,
+        "mean_personality_subj":1.0,
+        "extraversion":0.625,
+        "agreebleness":0.5,
+        "coscientiousness":0.2857142857,
+        "neuroticism":0.75,
+        "openness":0.4285714286,
+        "mean_trust_subj":0.1081081081,
+        "outlier_source":"mean_personality_subj"
+    },
+    {
+        "id":"9f036f54-e4ba-4892-b7bd-84bbe146f227",
+        "mean_cultural_closeness_subj":0.8,
+        "mean_personality_subj":0.5,
+        "extraversion":1.0,
+        "agreebleness":0.5,
+        "coscientiousness":0.7142857143,
+        "neuroticism":0.0,
+        "openness":0.4285714286,
+        "mean_trust_subj":0.5945945946,
+        "outlier_source":"extraversion"
+    }
+]

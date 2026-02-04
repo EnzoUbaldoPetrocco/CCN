@@ -1,0 +1,56 @@
+[
+    {
+        "Participant ID":{
+            "231":"a94aa824-023e-4ea5-b19d-759d1e0c89d0",
+            "232":"a94aa824-023e-4ea5-b19d-759d1e0c89d0",
+            "233":"a94aa824-023e-4ea5-b19d-759d1e0c89d0"
+        },
+        "mean_cultural_closeness":{
+            "231":1.3333333333,
+            "232":1.3333333333,
+            "233":1.3333333333
+        },
+        "mean_competence":{
+            "231":3.8888888889,
+            "232":3.8888888889,
+            "233":3.2222222222
+        },
+        "P":{
+            "231":"A",
+            "232":"B",
+            "233":"F"
+        },
+        "outlier_source":{
+            "231":"mean_personality_subj",
+            "232":"mean_personality_subj",
+            "233":"mean_personality_subj"
+        }
+    },
+    {
+        "Participant ID":{
+            "165":"9f036f54-e4ba-4892-b7bd-84bbe146f227",
+            "166":"9f036f54-e4ba-4892-b7bd-84bbe146f227",
+            "167":"9f036f54-e4ba-4892-b7bd-84bbe146f227"
+        },
+        "mean_cultural_closeness":{
+            "165":1.6666666667,
+            "166":2.0,
+            "167":2.0
+        },
+        "mean_competence":{
+            "165":5.4444444444,
+            "166":5.8333333333,
+            "167":5.5
+        },
+        "P":{
+            "165":"A",
+            "166":"B",
+            "167":"F"
+        },
+        "outlier_source":{
+            "165":"extraversion",
+            "166":"extraversion",
+            "167":"extraversion"
+        }
+    }
+]
