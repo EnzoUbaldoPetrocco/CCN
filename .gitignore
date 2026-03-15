@@ -12,3 +12,6 @@ DataAnalysis/intro/Intro CCN (Risposte).csv
 DataAnalysis/intro/Intro CCN (Risposte).xlsx
 
 *.pyc
+.venv
+annotations.csv
+Video2Paradigm.csv

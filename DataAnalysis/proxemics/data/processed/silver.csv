@@ -1,0 +1,173 @@
+Paradigm,Category,Value,Count,Percentage
+A,Head orientation ,Tracking,139,85.8
+A,Head orientation ,Neutral,17,10.49
+A,Head orientation ,Away,6,3.7
+A,Head orientation (optionals),nan,110,67.9
+A,Head orientation (optionals),Away,20,12.35
+A,Head orientation (optionals),Tracking,13,8.02
+A,Head orientation (optionals),Neutral,9,5.56
+A,Head orientation (optionals),"Away, Tracking",5,3.09
+A,Head orientation (optionals),"Away, Neutral",4,2.47
+A,Head orientation (optionals),"Tracking, Neutral",1,0.62
+A,Torso orientation ,Neutral,118,72.84
+A,Torso orientation ,Tracking,44,27.16
+A,Torso orientation (optional),nan,123,75.93
+A,Torso orientation (optional),Tracking,27,16.67
+A,Torso orientation (optional),Neutral,9,5.56
+A,Torso orientation (optional),Away,3,1.85
+A,Arms/Hands ,Neutral/Side,53,32.72
+A,Arms/Hands ,Back,52,32.1
+A,Arms/Hands ,Crossed,42,25.93
+A,Arms/Hands ,Self-touch,12,7.41
+A,Arms/Hands ,Fidgeting,3,1.85
+A,Arms/Hands (optionals),nan,89,54.94
+A,Arms/Hands (optionals),Self-touch,24,14.81
+A,Arms/Hands (optionals),"Crossed, Self-touch",9,5.56
+A,Arms/Hands (optionals),"Self-touch, Neutral/Side",8,4.94
+A,Arms/Hands (optionals),Back,5,3.09
+A,Arms/Hands (optionals),Crossed,5,3.09
+A,Arms/Hands (optionals),Neutral/Side,5,3.09
+A,Arms/Hands (optionals),"Self-touch, Fidgeting",4,2.47
+A,Arms/Hands (optionals),Fidgeting,4,2.47
+A,Arms/Hands (optionals),"Crossed, Neutral/Side",2,1.23
+A,Arms/Hands (optionals),"Crossed, Self-touch, Fidgeting",2,1.23
+A,Arms/Hands (optionals),"Crossed, Fidgeting, Neutral/Side",1,0.62
+A,Arms/Hands (optionals),"Self-touch, Back",1,0.62
+A,Arms/Hands (optionals),"Crossed, Back, Neutral/Side",1,0.62
+A,Arms/Hands (optionals),"Fidgeting, Neutral/Side",1,0.62
+A,Arms/Hands (optionals),"Fidgeting, Back, Neutral/Side",1,0.62
+A,Facial affect ,Neutral,96,59.26
+A,Facial affect ,Smile,62,38.27
+A,Facial affect ,Frown,4,2.47
+A,Facial affect (optionals),nan,46,28.4
+A,Facial affect (optionals),Smile,45,27.78
+A,Facial affect (optionals),Raised brows,17,10.49
+A,Facial affect (optionals),Neutral,14,8.64
+A,Facial affect (optionals),Frown,12,7.41
+A,Facial affect (optionals),"Smile, Raised brows",12,7.41
+A,Facial affect (optionals),"Smile, Frown",10,6.17
+A,Facial affect (optionals),"Frown, Raised brows",4,2.47
+A,Facial affect (optionals),"Smile, Neutral",1,0.62
+A,Facial affect (optionals),"Neutral, Raised brows",1,0.62
+A,Proxemics ,Comfortable,159,98.15
+A,Proxemics ,Withdrawal signal,3,1.85
+A,Proxemics (optionals),nan,148,91.36
+A,Proxemics (optionals),Withdrawal signal,13,8.02
+A,Proxemics (optionals),Invasion,1,0.62
+A,Unnamed: 3,nan,160,98.77
+A,Unnamed: 3,873bbe79-2354-4c1d-ae4e-f787e61a1956,2,1.23
+B,Head orientation ,Tracking,137,85.62
+B,Head orientation ,Neutral,16,10.0
+B,Head orientation ,Away,7,4.38
+B,Head orientation (optionals),nan,100,62.5
+B,Head orientation (optionals),Away,26,16.25
+B,Head orientation (optionals),Neutral,15,9.38
+B,Head orientation (optionals),"Away, Tracking",7,4.38
+B,Head orientation (optionals),Tracking,6,3.75
+B,Head orientation (optionals),"Away, Neutral",4,2.5
+B,Head orientation (optionals),"Tracking, Neutral",2,1.25
+B,Torso orientation ,Neutral,118,73.75
+B,Torso orientation ,Tracking,42,26.25
+B,Torso orientation (optional),nan,117,73.12
+B,Torso orientation (optional),Tracking,35,21.88
+B,Torso orientation (optional),Neutral,6,3.75
+B,Torso orientation (optional),Away,2,1.25
+B,Arms/Hands ,Neutral/Side,58,36.25
+B,Arms/Hands ,Crossed,52,32.5
+B,Arms/Hands ,Back,40,25.0
+B,Arms/Hands ,Self-touch,8,5.0
+B,Arms/Hands ,Fidgeting,2,1.25
+B,Arms/Hands (optionals),nan,87,54.37
+B,Arms/Hands (optionals),Self-touch,36,22.5
+B,Arms/Hands (optionals),"Self-touch, Neutral/Side",7,4.38
+B,Arms/Hands (optionals),Fidgeting,5,3.12
+B,Arms/Hands (optionals),Crossed,5,3.12
+B,Arms/Hands (optionals),"Crossed, Self-touch",5,3.12
+B,Arms/Hands (optionals),"Self-touch, Back",4,2.5
+B,Arms/Hands (optionals),Neutral/Side,3,1.88
+B,Arms/Hands (optionals),"Self-touch, Back, Neutral/Side",2,1.25
+B,Arms/Hands (optionals),Back,2,1.25
+B,Arms/Hands (optionals),"Self-touch, Fidgeting",2,1.25
+B,Arms/Hands (optionals),"Crossed, Fidgeting",1,0.62
+B,Arms/Hands (optionals),"Fidgeting, Back",1,0.62
+B,Facial affect ,Neutral,90,56.25
+B,Facial affect ,Smile,64,40.0
+B,Facial affect ,Frown,5,3.12
+B,Facial affect ,Raised brows,1,0.62
+B,Facial affect (optionals),nan,54,33.75
+B,Facial affect (optionals),Smile,41,25.62
+B,Facial affect (optionals),Neutral,13,8.12
+B,Facial affect (optionals),Raised brows,13,8.12
+B,Facial affect (optionals),"Smile, Raised brows",11,6.88
+B,Facial affect (optionals),"Smile, Frown",11,6.88
+B,Facial affect (optionals),Frown,8,5.0
+B,Facial affect (optionals),"Frown, Raised brows",5,3.12
+B,Facial affect (optionals),"Neutral, Raised brows",4,2.5
+B,Proxemics ,Comfortable,158,98.75
+B,Proxemics ,Withdrawal signal,2,1.25
+B,Proxemics (optionals),nan,154,96.25
+B,Proxemics (optionals),Withdrawal signal,5,3.12
+B,Proxemics (optionals),Comfortable,1,0.62
+B,Unnamed: 3,nan,157,98.12
+B,Unnamed: 3,Noise,2,1.25
+B,Unnamed: 3,873bbe79-2354-4c1d-ae4e-f787e61a1956,1,0.62
+F,Head orientation ,Tracking,131,80.86
+F,Head orientation ,Neutral,19,11.73
+F,Head orientation ,Away,12,7.41
+F,Head orientation (optionals),nan,99,61.11
+F,Head orientation (optionals),Away,21,12.96
+F,Head orientation (optionals),Tracking,19,11.73
+F,Head orientation (optionals),Neutral,15,9.26
+F,Head orientation (optionals),"Away, Tracking",4,2.47
+F,Head orientation (optionals),"Away, Neutral",2,1.23
+F,Head orientation (optionals),"Tracking, Neutral",2,1.23
+F,Torso orientation ,Neutral,115,70.99
+F,Torso orientation ,Tracking,47,29.01
+F,Torso orientation (optional),nan,126,77.78
+F,Torso orientation (optional),Tracking,25,15.43
+F,Torso orientation (optional),Neutral,9,5.56
+F,Torso orientation (optional),"Tracking, Neutral",1,0.62
+F,Torso orientation (optional),"Away, Tracking",1,0.62
+F,Arms/Hands ,Neutral/Side,63,38.89
+F,Arms/Hands ,Crossed,45,27.78
+F,Arms/Hands ,Back,43,26.54
+F,Arms/Hands ,Self-touch,10,6.17
+F,Arms/Hands ,Fidgeting,1,0.62
+F,Arms/Hands (optionals),nan,93,57.41
+F,Arms/Hands (optionals),Self-touch,38,23.46
+F,Arms/Hands (optionals),"Crossed, Self-touch",7,4.32
+F,Arms/Hands (optionals),Crossed,6,3.7
+F,Arms/Hands (optionals),Neutral/Side,3,1.85
+F,Arms/Hands (optionals),"Self-touch, Fidgeting",3,1.85
+F,Arms/Hands (optionals),Fidgeting,2,1.23
+F,Arms/Hands (optionals),"Self-touch, Neutral/Side",2,1.23
+F,Arms/Hands (optionals),Back,2,1.23
+F,Arms/Hands (optionals),"Self-touch, Fidgeting, Neutral/Side",1,0.62
+F,Arms/Hands (optionals),"Back, Neutral/Side",1,0.62
+F,Arms/Hands (optionals),"Crossed, Self-touch, Back",1,0.62
+F,Arms/Hands (optionals),"Crossed, Self-touch, Neutral/Side",1,0.62
+F,Arms/Hands (optionals),"Self-touch, Back",1,0.62
+F,Arms/Hands (optionals),"Fidgeting, Neutral/Side",1,0.62
+F,Facial affect ,Neutral,101,62.35
+F,Facial affect ,Smile,54,33.33
+F,Facial affect ,Frown,6,3.7
+F,Facial affect ,Raised brows,1,0.62
+F,Facial affect (optionals),nan,54,33.33
+F,Facial affect (optionals),Smile,53,32.72
+F,Facial affect (optionals),"Smile, Raised brows",15,9.26
+F,Facial affect (optionals),Raised brows,11,6.79
+F,Facial affect (optionals),Neutral,9,5.56
+F,Facial affect (optionals),Frown,7,4.32
+F,Facial affect (optionals),"Frown, Raised brows",5,3.09
+F,Facial affect (optionals),"Smile, Frown",3,1.85
+F,Facial affect (optionals),"Neutral, Frown, Raised brows",2,1.23
+F,Facial affect (optionals),"Smile, Frown, Raised brows",2,1.23
+F,Facial affect (optionals),"Neutral, Frown",1,0.62
+F,Proxemics ,Comfortable,160,98.77
+F,Proxemics ,Withdrawal signal,2,1.23
+F,Proxemics (optionals),nan,152,93.83
+F,Proxemics (optionals),Withdrawal signal,8,4.94
+F,Proxemics (optionals),Comfortable,1,0.62
+F,Proxemics (optionals),Invasion,1,0.62
+F,Unnamed: 3,nan,160,98.77
+F,Unnamed: 3,873bbe79-2354-4c1d-ae4e-f787e61a1956,2,1.23
