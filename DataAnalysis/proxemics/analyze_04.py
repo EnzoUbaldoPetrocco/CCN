@@ -1,92 +1,96 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
 import os
 
-# --- 1. CONFIGURATION ---
-FILE_PATH = './data/bronze/bronze.csv'
-OUTPUT_FOLDER = 'plots_04'  # The name of your subfolder
+def generate_behavior_frequency_plot(file_path, output_folder="behavioral_plots"):
+    """
+    Extracts behavioral categories from a CSV and generates a separate 
+    comparison figure for each category across paradigms A, B, and F.
+    """
+    # 1. Load and clean data
+    if not os.path.exists(file_path):
+        print(f"❌ Error: File {file_path} not found.")
+        return
 
-def generate_unified_behavior_plot(path):
-    df = pd.read_csv(path)
+    df = pd.read_csv(file_path)
     df.columns = [c.strip() for c in df.columns]
 
+    # Define the categories and their respective column pairs
     categories = {
-        'Head': ['Head orientation', 'Head orientation (optionals)'],
-        'Torso': ['Torso orientation', 'Torso orientation (optional)'],
-        'Arms_Hands': ['Arms/Hands', 'Arms/Hands (optionals)'],
-        'Facial_Affect': ['Facial affect', 'Facial affect (optionals)'],
-        'Proxemics': ['Proxemics', 'Proxemics (optionals)']
+        "Head Orientation": ["Head orientation", "Head orientation (optionals)"],
+        "Torso Orientation": ["Torso orientation", "Torso orientation (optional)"],
+        "Arms-Hands": ["Arms/Hands", "Arms/Hands (optionals)"],
+        "Facial Affect": ["Facial affect", "Facial affect (optionals)"],
+        "Proxemics": ["Proxemics", "Proxemics (optionals)"]
     }
 
-    if not os.path.exists(OUTPUT_FOLDER): os.makedirs(OUTPUT_FOLDER)
-    sns.set_theme(style="white")
+    # Create output directory
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
-    for cat_name, cols in categories.items():
-        valid_cols = [c for c in cols if c in df.columns]
-        if not valid_cols: continue
+    paradigms = ['A', 'B', 'F']
 
-        # Process data into a frequency count per Subject/Paradigm
-        # This gives the violin the "height" and "curve" it needs
-        plot_data = []
+    # 2. Process each category individually
+    for category_name, cols in categories.items():
+        category_data = []
         
-        # We group by Paradigm and a Window (to get a distribution, not just one number)
-        for paradigm in df['Paradigm'].unique():
-            p_df = df[df['Paradigm'] == paradigm].reset_index(drop=True)
+        for p in paradigms:
+            sub_df = df[df['Paradigm'] == p]
             
-            # Split into 10 temporal segments to see the distribution of usage
-            chunks = [p_df.iloc[i:i+20] for i in range(0, len(p_df), 20)]
-            
-            for chunk in chunks:
-                # Combine all column values in this chunk
-                all_text = chunk[valid_cols].fillna('').astype(str).values.flatten()
-                # Split strings that contain commas and clean
-                labels = [item.strip() for sublist in [s.split(',') for s in all_text] for item in sublist]
-                labels = [l for l in labels if l.lower() not in ['', 'nan', 'none']]
-                
-                counts = pd.Series(labels).value_counts()
-                total = len(chunk)
-                
-                for val, count in counts.items():
-                    plot_data.append({
-                        'Paradigm': paradigm,
-                        'Value': val,
-                        'Prevalence (%)': (count / total) * 100
-                    })
+            for col in cols:
+                if col in df.columns:
+                    # Explode comma-separated labels
+                    series = sub_df[col].dropna().astype(str).str.split(',')
+                    exploded = series.explode()
+                    
+                    for val in exploded:
+                        val_clean = val.strip()
+                        if val_clean and val_clean.lower() != 'nan':
+                            category_data.append({
+                                "Paradigm": p,
+                                "Value": val_clean
+                            })
 
-        if not plot_data: continue
-        final_df = pd.DataFrame(plot_data)
+        if not category_data:
+            continue
 
-        # Filter for the most significant values
-        top_vals = final_df.groupby('Value')['Prevalence (%)'].mean().nlargest(10).index
-        final_df = final_df[final_df['Value'].isin(top_vals)]
+        plot_df = pd.DataFrame(category_data)
 
-        # --- THE PLOT ---
-        plt.figure(figsize=(14, 7))
+        # 3. Create a figure for the specific category
+        sns.set_theme(style="whitegrid")
         
-        # This draws the Paradigms on the Y axis and the behaviors on the X axis.
-        # The 'violin' shows the density of how often that label was used.
-        sns.violinplot(
-            data=final_df,
-            x='Value',
-            y='Prevalence (%)',
-            hue='Paradigm',
-            split=True,       # This creates the Social vs Non-Social comparison side-by-side
-            inner="quart",
-            palette="muted",
-            bw_adjust=0.5
+        # FacetGrid: 1 Row, 3 Columns (A, B, F)
+        g = sns.catplot(
+            data=plot_df, 
+            x="Value", 
+            col="Paradigm", 
+            kind="count",
+            col_order=paradigms,
+            sharex=True,  # Keeps the X-axis consistent for comparison within the category
+            sharey=False, 
+            height=5, 
+            aspect=1.2,
+            palette="viridis"
         )
 
-        plt.title(f'Behavioral Profile: {cat_name}', fontsize=16, fontweight='bold')
-        plt.xlabel('Annotated Values', fontsize=12)
-        plt.ylabel('Annotation Density (%)', fontsize=12)
-        plt.xticks(rotation=30)
-        plt.legend(title='Paradigm', loc='upper right')
+        # Styling
+        g.fig.suptitle(f"Frequency Analysis: {category_name}", fontsize=16, fontweight='bold', y=1.05)
+        g.set_titles("Paradigm {col_name}")
+        g.set_axis_labels("Observed Label", "Total Frequency")
+        
+        for ax in g.axes.flat:
+            plt.setp(ax.get_xticklabels(), rotation=45, ha='right')
 
-        plt.tight_layout()
-        plt.savefig(os.path.join(OUTPUT_FOLDER, f"{cat_name}_distribution.png"))
+        # 4. Save the specific category plot
+        safe_name = category_name.replace(" ", "_").replace("/", "-")
+        save_path = os.path.join(output_folder, f"{safe_name}_comparison.png")
+        g.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
 
-if __name__ == "__main__":
-    generate_unified_behavior_plot(FILE_PATH)
-    print(f"✅ Success! Graphs created in /{OUTPUT_FOLDER}")
+# --- Execution ---
+FILE_PATH = "./data/bronze/bronze.csv"
+OUTPUT_FOLDER = "plots_04"
+
+generate_behavior_frequency_plot(FILE_PATH, output_folder=OUTPUT_FOLDER)
+print(f"✅ Success! Graphs created in /{OUTPUT_FOLDER}")
