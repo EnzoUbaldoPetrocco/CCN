@@ -1,0 +1,16 @@
+=== CONCLUSIONE DELL'ESPERIMENTO PROSSEMICO ===
+
+PROSPETTIVA: Third View (Human)
+  Distanza Ottimale Identificata: Q5
+  Punteggio di Accettazione Medio: 0.79
+  Divergenza IT-DE (Gap): 0.046
+----------------------------------------
+PROSPETTIVA: First View (You)
+  Distanza Ottimale Identificata: Q4
+  Punteggio di Accettazione Medio: 0.66
+  Divergenza IT-DE (Gap): 0.052
+----------------------------------------
+
+NOTA METODOLOGICA:
+- Se il Gap è < 0.1, la distanza è considerata universalmente valida.
+- Se il punteggio è < 0.5, la distanza è percepita come 'non confortevole'.

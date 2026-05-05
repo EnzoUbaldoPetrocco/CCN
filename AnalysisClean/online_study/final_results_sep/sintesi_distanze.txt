@@ -1,0 +1,10 @@
+=== DETERMINAZIONE DISTANZE OTTIMALI PER CULTURA ===
+
+
+CULTURA: Italiano
+  - Third View (Video): Distanza Ottimale = Q5 (Rating: 0.81)
+  - First View (Perspective): Distanza Ottimale = Q3 (Rating: 0.66)
+
+CULTURA: Deutsch
+  - Third View (Video): Distanza Ottimale = Q4 (Rating: 0.79)
+  - First View (Perspective): Distanza Ottimale = Q4 (Rating: 0.68)

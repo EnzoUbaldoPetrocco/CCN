@@ -1,0 +1,43 @@
+====================================================
+   REPORT STATISTICO DETTAGLIATO: IT vs DE
+====================================================
+
+--- CATEGORIA: CULTURA ---
+[ANALISI AGGREGATA]
+  P-Value: 0.3468 -> NON SIGNIFICATIVO
+
+[ANALISI PUNTUALE PER DOMANDA]
+      Culture_Country           | P-Value: 0.7800
+      Culture_Language          | P-Value: 0.3004
+      Culture_Culture_Self      | P-Value: 0.1692
+
+--------------------------------------------------
+
+--- CATEGORIA: ROBOT-HUMAN (VIDEO) ---
+[ANALISI AGGREGATA]
+  P-Value: 0.7377 -> NON SIGNIFICATIVO
+
+[ANALISI PUNTUALE PER DOMANDA]
+      Robot_Human_Q1            | P-Value: 0.6245
+      Robot_Human_Q2            | P-Value: 0.3595
+      Robot_Human_Q3            | P-Value: 0.5751
+      Robot_Human_Q4            | P-Value: 0.7234
+      Robot_Human_Q5            | P-Value: 0.5699
+      Robot_Human_Q6            | P-Value: 0.3542
+
+--------------------------------------------------
+
+--- CATEGORIA: ROBOT-YOU (PROSPETTIVA) ---
+[ANALISI AGGREGATA]
+  P-Value: 1.0000 -> NON SIGNIFICATIVO
+
+[ANALISI PUNTUALE PER DOMANDA]
+      Robot_You_Q1              | P-Value: 0.9607
+      Robot_You_Q2              | P-Value: 0.6341
+      Robot_You_Q3              | P-Value: 0.3764
+      Robot_You_Q4              | P-Value: 0.4212
+      Robot_You_Q5              | P-Value: 0.8826
+      Robot_You_Q6              | P-Value: 0.7207
+
+--------------------------------------------------
+
