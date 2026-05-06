@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 from scipy import stats
+from cliffs_delta import cliffs_delta
 
 # --- CONFIGURAZIONE ---
 BASE_PATH = os.path.dirname(__file__)
@@ -9,8 +10,8 @@ SILVER_PATH = os.path.join(BASE_PATH, 'silver_layer')
 REPORT_PATH = os.path.join(BASE_PATH, 'report_visivi')
 
 def normalizza_likert(val):
-    """Normalizza scala 1-5 in range 0-1."""
-    return (val - 1) / 4
+    """Normalizza scala 1-7 in range 0-1."""
+    return (val - 1) / 6
 
 def get_effetto_cliffs_delta(delta):
     """
@@ -60,9 +61,9 @@ def calcola_statistiche_avanzate():
     df = pd.read_csv(os.path.join(SILVER_PATH, 'dataset_unificato_pulito.csv'))
     
     # Filtro culture di interesse[cite: 1]
-    df_study = df[df['Language'].isin(['Italiano', 'Deutsch'])].copy()
+    df_study = df[df['Language'].isin(['Italian', 'German'])].copy()
     
-    likert_cols = [c for c in df_study.columns if 'Culture_' in c or 'Robot_' in c]
+    likert_cols = [c for c in df_study.columns if 'Culture_' in c or 'View' in c]
     df_study[likert_cols] = df_study[likert_cols].apply(pd.to_numeric, errors='coerce')
 
     # 1. NORMALIZZAZIONE[cite: 1]
@@ -72,21 +73,23 @@ def calcola_statistiche_avanzate():
     results = []
 
     for col in likert_cols:
-        group_it = df_norm[df_norm['Language'] == 'Italiano'][col].dropna()
-        group_de = df_norm[df_norm['Language'] == 'Deutsch'][col].dropna()
+        group_it = df_norm[df_norm['Language'] == 'Italian'][col].dropna()
+        group_de = df_norm[df_norm['Language'] == 'German'][col].dropna()
         
         if len(group_it) < 2 or len(group_de) < 2: continue
 
         # Test KS e Cliff's Delta[cite: 1]
         _, ks_p = stats.ks_2samp(group_it, group_de)
         
-        def cliffs_delta(lst1, lst2):
+        """def cliffs_delta(lst1, lst2):
+            
             m, n = len(lst1), len(lst2)
             # Calcolo ottimizzato del Delta[cite: 1]
             diffs = np.array([np.sign(x - y) for x in lst1 for y in lst2])
-            return np.mean(diffs)
+            return np.mean(diffs)"""
 
-        delta = cliffs_delta(group_it, group_de)
+        delta, res = cliffs_delta(group_it, group_de)
+        print(f"Cliff's Delta per {col}: {delta:.4f} (Significance={res})")
 
         results.append({
             'Variabile': col,
@@ -108,5 +111,11 @@ def calcola_statistiche_avanzate():
     
     print("Elaborazione completata: analisi_avanzata_distribuzioni.csv e tabella_statistiche.tex generati.")
 
+def main():
+    try:
+        calcola_statistiche_avanzate()
+    except Exception as e:
+        print(f"Error during advanced statistics calculation: {e}")
+
 if __name__ == "__main__":
-    calcola_statistiche_avanzate()
+    main()

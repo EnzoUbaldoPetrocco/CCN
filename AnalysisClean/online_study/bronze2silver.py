@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 
+
+
 def pulisci_e_trasforma_dati(input_csv_path: str, output_silver_dir: str = 'silver_layer'):
     """
     Estrae e consolida i dati da un form multilingua, mantenendo la segmentazione 
@@ -31,13 +33,22 @@ def pulisci_e_trasforma_dati(input_csv_path: str, output_silver_dir: str = 'silv
     df_clean['Culture_Language'] = consolida_colonne([6, 24, 42])
     df_clean['Culture_Culture_Self'] = consolida_colonne([7, 25, 43])
     
-    # 4. Estrazione Robot-Human Distance (Video)
+    # Replace the old extraction loops with these:
+
+    # 4. Extraction: 3rd View Video (was Robot-Human)
     for i in range(6):
-        df_clean[f'Robot_Human_Q{i+1}'] = consolida_colonne([8+i, 26+i, 44+i])
+        new_col = f'3rd View Video {i+1}'
+        df_clean[new_col] = consolida_colonne([8+i, 26+i, 44+i])
         
-    # 5. Estrazione Robot-You Perspective Distance
+    # 5. Extraction: 1st View Image (was Robot-You)
     for i in range(6):
-        df_clean[f'Robot_You_Q{i+1}'] = consolida_colonne([14+i, 32+i, 50+i])
+        new_col = f'1st View Image {i+1}'
+        df_clean[new_col] = consolida_colonne([14+i, 32+i, 50+i])
+
+    # Translate Language values immediately
+    df_clean['Language'] = df_clean['Language'].replace({'Italiano': 'Italian', 'Deutsch': 'German'})
+
+   
         
     # Rimozione righe prive di ID (dati incompleti)
     df_clean.dropna(subset=['Prolific_ID'], inplace=True)
@@ -62,7 +73,7 @@ def pulisci_e_trasforma_dati(input_csv_path: str, output_silver_dir: str = 'silv
             per_lingua_list.append(stats)
         
         # Unifica le statistiche in un unico file comparativo
-        df_stats_finale = pd.concat(per_lingua_list).reset_index().rename(columns={'index': 'Valore_Risposta'})
+        df_stats_finale = pd.concat(per_lingua_list).reset_index().rename(columns={'index': 'Answer_Value'})
         path_stats = os.path.join(output_silver_dir, f'statistiche_{nome_base}.csv')
         df_stats_finale.to_csv(path_stats, index=False)
         print(f"Esportati: {nome_base}.csv e statistiche_{nome_base}.csv")
@@ -71,20 +82,26 @@ def pulisci_e_trasforma_dati(input_csv_path: str, output_silver_dir: str = 'silv
     
     # Segmento Cultura
     cult_cols = ['Prolific_ID', 'Language', 'Culture_Country', 'Culture_Language', 'Culture_Culture_Self']
-    esporta_segmento(df_clean[cult_cols], 'argomento_cultura')
+    esporta_segmento(df_clean[cult_cols], 'subject culture')
 
-    # Segmento Robot-Human Video
-    rh_cols = ['Prolific_ID', 'Language'] + [f'Robot_Human_Q{i+1}' for i in range(6)]
-    esporta_segmento(df_clean[rh_cols], 'argomento_robot_human_video')
+    # Segmento 3rd View Video
+    rh_cols = ['Prolific_ID', 'Language'] + [f'3rd View Video {i+1}' for i in range(6)]
+    esporta_segmento(df_clean[rh_cols], 'evaluation third view video')
 
-    # Segmento Robot-You Perspective
-    ry_cols = ['Prolific_ID', 'Language'] + [f'Robot_You_Q{i+1}' for i in range(6)]
-    esporta_segmento(df_clean[ry_cols], 'argomento_robot_you_perspective')
+    # Segmento 1st View Image
+    ry_cols = ['Prolific_ID', 'Language'] + [f'1st View Image {i+1}' for i in range(6)]
+    esporta_segmento(df_clean[ry_cols], 'evaluation first view image')
 
     # Salvataggio dataset unificato finale
     df_clean.to_csv(os.path.join(output_silver_dir, 'dataset_unificato_pulito.csv'), index=False)
     print("Processo completato: dataset_unificato_pulito.csv generato.")
 
-if __name__ == "__main__":
+def main():
     CSV_PATH = r"./bronze_layer/online_study.csv"
-    pulisci_e_trasforma_dati(CSV_PATH, 'silver_layer')
+    try:
+        pulisci_e_trasforma_dati(CSV_PATH, 'silver_layer')
+    except Exception as e:
+        print(f"Error during data cleaning and transformation: {e}")
+
+if __name__ == "__main__":
+    main()

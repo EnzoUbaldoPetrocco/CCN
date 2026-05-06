@@ -22,14 +22,14 @@ def estrai_distanze_ottimali():
     df = pd.read_csv(path_dataset)
     
     # Filtro lingue target
-    df = df[df['Language'].isin(['Italiano', 'Deutsch'])].copy()
+    df = df[df['Language'].isin(['Italian', 'German'])].copy()
     
     # Colonne relative alle distanze[cite: 1]
-    cols_robot = [c for c in df.columns if 'Robot_' in c]
+    cols_robot = [c for c in df.columns if 'View' in c]
     df[cols_robot] = df[cols_robot].apply(pd.to_numeric, errors='coerce')
     
-    # Normalizzazione 1-5 -> 0-1[cite: 1]
-    df[cols_robot] = (df[cols_robot] - 1) / 4
+    # Normalizzazione 1-7 -> 0-1[cite: 1]
+    df[cols_robot] = (df[cols_robot] - 1) / 6
     
     # Calcolo medie per lingua[cite: 1]
     medie_per_lingua = df.groupby('Language')[cols_robot].mean()
@@ -37,11 +37,11 @@ def estrai_distanze_ottimali():
     report_linee = []
     report_linee.append("=== DETERMINAZIONE DISTANZE OTTIMALI PER CULTURA ===\n")
     
-    for lingua in ['Italiano', 'Deutsch']:
-        report_linee.append(f"\nCULTURA: {lingua}")
+    for lingua in ['Italian', 'German']:
+        report_linee.append(f"\nNATIOAL CULTURE: {lingua}")
         # Dividiamo per prospettiva[cite: 1]
-        for vista in ['Human', 'You']:
-            label_vista = "Third View (Video)" if vista == 'Human' else "First View (Perspective)"
+        for vista in ['Video', 'Image']:
+            label_vista = "3rd View (Video)" if vista == 'Video' else "1st View (Image)"
             filtro_cols = [c for c in cols_robot if vista in c]
             
             # Identificazione Q con media massima[cite: 1]
@@ -60,10 +60,13 @@ def estrai_distanze_ottimali():
     # Salvataggio delle medie in formato CSV per utilizzi futuri[cite: 1]
     medie_per_lingua.to_csv(os.path.join(FINAL_PATH, 'medie_normalizzate_finali.csv'))
 
-if __name__ == "__main__":
+def main():
     try:
         inizializza_cartella()
         estrai_distanze_ottimali()
         print(f"Processo completato. Risultati disponibili in: {FINAL_PATH}")
     except Exception as e:
         print(f"Errore durante l'esecuzione: {e}")
+
+if __name__ == "__main__":
+    main()

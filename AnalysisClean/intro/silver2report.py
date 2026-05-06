@@ -4,96 +4,86 @@ import os
 from scipy import stats
 import matplotlib.pyplot as plt
 import seaborn as sns
+from cliffs_delta import cliffs_delta
 
-# --- CONFIGURAZIONE PERCORSI ---
+# --- CONFIGURATION ---
 BASE_PATH = os.path.dirname(__file__)
 SILVER_PATH = os.path.join(BASE_PATH, 'silver_layer')
-REPORT_PATH = os.path.join(BASE_PATH, 'report_visivi')
-STATS_PATH = os.path.join(BASE_PATH, 'statistiche')
+REPORT_PATH = os.path.join(BASE_PATH, 'report_intro')
+STATS_PATH = os.path.join(BASE_PATH, 'statistics_intro')
 
-def inizializza_ambiente():
-    """Crea le directory necessarie e imposta lo stile dei grafici."""
+def initialize():
     os.makedirs(REPORT_PATH, exist_ok=True)
     os.makedirs(STATS_PATH, exist_ok=True)
     sns.set_theme(style="whitegrid")
 
-def cliffs_delta(lst1, lst2):
-    """Calcola l'effetto Cliff's Delta per il confronto tra gruppi."""
-    m, n = len(lst1), len(lst2)
-    diffs = np.array([np.sign(x - y) for x in lst1 for y in lst2])
-    return np.mean(diffs)
-
-def get_effetto_label(delta):
-    """Classifica l'ampiezza dell'effetto."""
-    abs_delta = abs(delta)
-    if abs_delta < 0.147: return "Trasc."
-    elif abs_delta < 0.33: return "Piccolo"
-    elif abs_delta < 0.474: return "Medio"
-    else: return "Grande"
-
-def esegui_pipeline_analisi():
-    inizializza_ambiente()
+def run_full_analysis():
+    # Load the silver data
+    df = pd.read_csv(os.path.join(SILVER_PATH, 'intro_study_silver.csv'))
     
-    # Caricamento del dataset silver completo
-    df = pd.read_csv(os.path.join(SILVER_PATH, 'full_silver_dataset.csv'))
-    
-    # Definizione gruppi di colonne basati sul tuo schema
-    sezioni = {
-        "Cultura": [col for col in df.columns if "relationship" in col.lower() or "culture" in col.lower() and "nationality" not in col.lower()],
-        "Personalità": [col for col in df.columns if "i_see_myself" in col.lower() or "reserved" in col.lower()],
-        "Robot_Trust": [col for col in df.columns if "robot" in col.lower()]
+    # Identify variable categories
+    sections = {
+        "CULTURE": [c for c in df.columns if "Culture_Affinity" in c],
+        "PERSONALITY": [c for c in df.columns if "Personality_BFI" in c],
+        "ROBOT_TRUST": [c for c in df.columns if "Robot_Trust" in c]
     }
 
     results = []
 
-    for nome_sez, cols in sezioni.items():
-        print(f"Elaborazione sezione: {nome_sez}...")
-        
-        # Filtro per le due nazionalità principali per il confronto[cite: 2, 3]
-        df_sub = df[df['Nationality'].isin(['Italian', 'German'])].copy()
-        
-        for c in cols:
-            group_it = df_sub[df_sub['Nationality'] == 'Italian'][c].dropna()
-            group_de = df_sub[df_sub['Nationality'] == 'German'][c].dropna()
-            
-            if len(group_it) < 2 or len(group_de) < 2: continue
+    for sec_name, cols in sections.items():
+        for col in cols:
+            it_data = df[df['Nationality'] == 'Italian'][col].dropna()
+            de_data = df[df['Nationality'] == 'German'][col].dropna()
+            global_data = df[col].dropna()
 
-            # Analisi Inferenziale (Mann-Whitney U)
-            u_stat, p_val = stats.mannwhitneyu(group_it, group_de)
-            
-            # Dimensione dell'effetto[cite: 3]
-            delta = cliffs_delta(group_it, group_de)
-            
+            if it_data.empty or de_data.empty: continue
+
+            # 1. Statistics
+            _, p_val = stats.ks_2samp(it_data, de_data)
+            d, res = cliffs_delta(it_data, de_data)
+
             results.append({
-                'Categoria': nome_sez,
-                'Variabile': c,
-                'IT_Media': group_it.mean(),
-                'DE_Media': group_de.mean(),
+                'Item': col,
+                'IT_Mean': it_data.mean(),
+                'DE_Mean': de_data.mean(),
                 'P_Value': p_val,
-                'Cliffs_Delta': delta,
-                'Effetto': get_effetto_label(delta)
+                'Cliff_d': d,
+                'Magnitude': res
             })
 
-            # Generazione Grafici (Boxplot)[cite: 2]
-            plt.figure(figsize=(8, 5))
-            sns.boxplot(data=df_sub, x='Nationality', y=c, palette='Set2')
-            plt.title(f"Confronto IT vs DE: {c[:40]}...")
-            plt.savefig(os.path.join(REPORT_PATH, f"boxplot_{nome_sez}_{c[:20]}.pdf"))
+            # 2. SEPARATED + GLOBAL DISTRIBUTION PLOT
+            plt.figure(figsize=(10, 6))
+            
+            if sec_name == "ROBOT_TRUST":
+                # Continuous Density for 0-100%
+                sns.kdeplot(global_data, color='gray', label='Global (All)', ls='--', lw=2, alpha=0.6)
+                sns.kdeplot(it_data, color='#2ecc71', label='Italian', fill=True, alpha=0.4)
+                sns.kdeplot(de_data, color='#3498db', label='German', fill=True, alpha=0.4)
+                plt.xlim(0, 100)
+            else:
+                # Frequency Bars for Likert (1-5 or 1-7)
+                # To show the 'Global' trend, we plot a background bar or a line
+                bins = range(1, (8 if sec_name == "CULTURE" else 6))
+                
+                # Plot Italian and German side-by-side
+                sns.countplot(data=df, x=col, hue='Nationality', 
+                              palette={'Italian': '#2ecc71', 'German': '#3498db'},
+                              alpha=0.8)
+                
+                # Overlay Global Mean as a vertical line
+                plt.axvline(x=global_data.mean() - 1, color='black', ls=':', label=f'Global Mean ({global_data.mean():.2f})')
+
+            plt.title(f"Distribution Comparison: {col.replace('_', ' ')}")
+            plt.ylabel("Density / Count")
+            plt.xlabel("Scale Value")
+            plt.legend(frameon=True)
+            
+            plt.savefig(os.path.join(REPORT_PATH, f"distribution_{col}.pdf"), bbox_inches='tight')
             plt.close()
 
-    # Salvataggio Statistiche in CSV e LaTeX[cite: 3]
-    df_results = pd.DataFrame(results)
-    df_results.to_csv(os.path.join(STATS_PATH, 'analisi_differenze_culturali.csv'), index=False)
-    
-    # Generazione Tabella LaTeX professionale[cite: 3]
-    with open(os.path.join(STATS_PATH, 'tabella_risultati.tex'), 'w') as f:
-        f.write(df_results.to_latex(index=False, float_format="%.3f", 
-                                   caption="Confronto Statistico tra Nazionalità",
-                                   label="tab:stat_results"))
+    # Save Stats Summary
+    pd.DataFrame(results).to_csv(os.path.join(STATS_PATH, 'intro_stats.csv'), index=False)
 
 if __name__ == "__main__":
-    try:
-        esegui_pipeline_analisi()
-        print("Analisi completata. Controlla le cartelle 'report_visivi' e 'statistiche'.")
-    except Exception as e:
-        print(f"Errore durante l'analisi: {e}")
+    initialize()
+    run_full_analysis()

@@ -16,22 +16,22 @@ def inizializza():
 def carica_e_normalizza():
     df = pd.read_csv(os.path.join(SILVER_PATH, 'dataset_unificato_pulito.csv'))
     # Filtro i due paesi principali
-    df = df[df['Language'].isin(['Italiano', 'Deutsch'])].copy()
+    df = df[df['Language'].isin(['Italian', 'German'])].copy()
     
-    # Identificazione colonne e normalizzazione (1-5 -> 0-1)
-    likert_cols = [c for c in df.columns if 'Robot_' in c]
+    # Identificazione colonne e normalizzazione (1-7 -> 0-1)
+    likert_cols = [c for c in df.columns if 'View' in c]
     df[likert_cols] = df[likert_cols].apply(pd.to_numeric, errors='coerce')
-    df[likert_cols] = (df[likert_cols] - 1) / 4
+    df[likert_cols] = (df[likert_cols] - 1) / 6
     return df, likert_cols
 
 def estrai_risultati_finali(df, cols):
     # Calcolo medie per lingua e prospettiva
     summary = df.groupby('Language')[cols].mean().transpose().reset_index()
-    summary.columns = ['Domanda', 'DE', 'IT']
+    summary.columns = ['Question', 'DE', 'IT']
     
     # Separiamo per prospettiva
-    summary['Prospettiva'] = summary['Domanda'].apply(lambda x: 'Third View (Human)' if 'Human' in x else 'First View (You)')
-    summary['ID_Distanza'] = summary['Domanda'].str.extract(r'(Q\d)').iloc[:,0]
+    summary['Prospettiva'] = summary['Question'].apply(lambda x: '3rd View Video' if 'Video' in x else '1st View Image')
+    summary['ID_Distanza'] = summary['Question'].str.extract(r'( \d)').iloc[:,0]
     
     return summary
 
@@ -42,16 +42,16 @@ def genera_grafico_confronto(summary):
     # Plot per prospettiva[cite: 1]
     for prosp in summary['Prospettiva'].unique():
         data_sub = summary[summary['Prospettiva'] == prosp]
-        linestyle = '-' if 'First' in prosp else '--'
+        linestyle = '-' if '1st' in prosp else '-.'
         
         plt.plot(data_sub['ID_Distanza'], data_sub['IT'], label=f'IT - {prosp}', 
                  marker='o', linestyle=linestyle, color='forestgreen', linewidth=2)
         plt.plot(data_sub['ID_Distanza'], data_sub['DE'], label=f'DE - {prosp}', 
-                 marker='s', linestyle=linestyle, color='royalblue', linewidth=2)
+                 marker='^', linestyle=linestyle, color='royalblue', linewidth=2)
 
-    plt.title("Confronto delle Curve Prossemiche: Identificazione Distanza Ottimale", fontsize=14)
-    plt.xlabel("ID Distanza (Q1 ravvicinata - Q6 distante)")
-    plt.ylabel("Accettabilità Media (Normalizzata 0-1)")
+    plt.title("Proxity curves comparison", fontsize=14)
+    plt.xlabel("Distance ID (Q1 close - Q6 distant)", fontsize=12)
+    plt.ylabel("Average Acceptability (Normalized 0-1)", fontsize=12)
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.grid(True, alpha=0.3)
     plt.tight_layout()

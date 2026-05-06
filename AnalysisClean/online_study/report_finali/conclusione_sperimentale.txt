@@ -1,14 +1,14 @@
 === CONCLUSIONE DELL'ESPERIMENTO PROSSEMICO ===
 
-PROSPETTIVA: Third View (Human)
-  Distanza Ottimale Identificata: Q5
-  Punteggio di Accettazione Medio: 0.79
-  Divergenza IT-DE (Gap): 0.046
+PROSPETTIVA: 3rd View Video
+  Distanza Ottimale Identificata:  5
+  Punteggio di Accettazione Medio: 0.52
+  Divergenza IT-DE (Gap): 0.030
 ----------------------------------------
-PROSPETTIVA: First View (You)
-  Distanza Ottimale Identificata: Q4
-  Punteggio di Accettazione Medio: 0.66
-  Divergenza IT-DE (Gap): 0.052
+PROSPETTIVA: 1st View Image
+  Distanza Ottimale Identificata:  4
+  Punteggio di Accettazione Medio: 0.44
+  Divergenza IT-DE (Gap): 0.035
 ----------------------------------------
 
 NOTA METODOLOGICA:

@@ -1,0 +1,7 @@
+=== DATASET METADATA REPORT ===
+
+Total Valid Participants: 36
+Italian Cohort: 17
+German Cohort: 19
+
+Note: English-speaking participants were excluded prior to analysis.
