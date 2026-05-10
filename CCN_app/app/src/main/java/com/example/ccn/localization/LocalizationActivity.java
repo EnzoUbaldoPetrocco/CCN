@@ -541,6 +541,7 @@ public class LocalizationActivity extends AppCompatActivity implements  RobotLif
 
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now");
+        intent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
 
         // Optional: fine-tune silence timeout
         //intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 2000);
