@@ -1,0 +1,5 @@
+Participant_ID,Is_MD_Outlier,Is_IsoForest_Outlier,MD_Score,P_Value
+6dae70e5-448b-415e-8971-daab8041bce0,False,True,3.6,0.0733
+f7cb8760-aa5b-491a-bbb2-c61c0d1fe54b,False,True,4.03,0.0233
+7136f1af-5dd3-4449-8119-25485f011a03,False,True,3.61,0.0718
+d5f6e081-f5da-4662-8e94-5e78d8faf500,False,True,4.34,0.0088
