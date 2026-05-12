@@ -1,0 +1,18 @@
+1. H0 hypothesis
+Since p-value<α, H0 is rejected.
+Some of the groups' averages consider to be not equal.
+In other words, the difference between the sample averages of some groups is big enough to be statistically significant.
+
+2. P-value
+p-value equals 0.0179909, [p( x ≤ F ) = 0.982009 ]. It means that the chance of type1 error (rejecting a correct H0) is small: 0.01799 (1.8%)
+The smaller the p-value the stronger it support H1
+
+3. The statistics
+The test statistic F equals 5.838, which is not in the 95% region of acceptance: [0 : 3.9619]
+
+4. Effect size
+The observed effect size f is medium (0.27). That indicates that the magnitude of the difference between the averages is medium.
+The η2 equals 0.069. It means that the group explains 6.9% of the variance from the average (similar to R2 in the linear regression)
+
+5. Tukey HSD / Tukey Kramer
+The means of the following pair are significantly different: x1-x2.

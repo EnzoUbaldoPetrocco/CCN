@@ -1,0 +1,13 @@
+Method: Tukey's fences
+
+How to calculate Q1 and Q3? go to Q1 and Q3 step by step calculation.
+Q1 = 0.5.
+Q3 = 0.625.
+IRQ = Q3 - Q1 = 0.625 - 0.5 = 0.125.
+Lower = Q1 - k * IRQ = 0.5 - 1.5*0.125 = 0.3125.
+Upper = Q3 + k * IRQ = 0.625 + 1.5*0.125 = 0.8125.
+Sample size (n) = 81.
+Outlier count: 9.
+Outliers: 0.875, 0.25, 0.25, 0.25, 0.875, 0.25, 0.875, 0.875, 0.25.
+Some outliers may be valid data, first, you should try to fix the outlier if possible (Human/Measurement/Experiment).
+You should remove outliers only if you identify them as invalid observations!

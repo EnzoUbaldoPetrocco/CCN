@@ -1,0 +1,19 @@
+Analysis_Type,Context,Comparison,Feature,U_Stat,p_Value
+Intra-Nationality,German,F vs B,Culture_Closeness_Avg,1036.5,0.3333846447210389
+Intra-Nationality,German,F vs B,Competence_Overall,867.0,0.6221757920065043
+Intra-Nationality,German,F vs A,Culture_Closeness_Avg,1141.5,0.06020439384429537
+Intra-Nationality,German,F vs A,Competence_Overall,1146.5,0.05551086624361857
+Intra-Nationality,German,B vs A,Culture_Closeness_Avg,960.0,0.7608897710022737
+Intra-Nationality,German,B vs A,Competence_Overall,1224.0,0.009734841209584993
+Intra-Nationality,Italian,F vs A,Culture_Closeness_Avg,842.0,0.2125600841245442
+Intra-Nationality,Italian,F vs A,Competence_Overall,807.0,0.3796165170868694
+Intra-Nationality,Italian,F vs B,Culture_Closeness_Avg,872.5,0.11747253133960271
+Intra-Nationality,Italian,F vs B,Competence_Overall,588.5,0.16663758887047297
+Intra-Nationality,Italian,A vs B,Culture_Closeness_Avg,728.5,0.9500466222329143
+Intra-Nationality,Italian,A vs B,Competence_Overall,515.5,0.032166877393889126
+Intra-Paradigm,Paradigm F,German vs Italian,Culture_Closeness_Avg,793.5,0.8270142028466506
+Intra-Paradigm,Paradigm F,German vs Italian,Competence_Overall,731.5,0.4207832172091175
+Intra-Paradigm,Paradigm B,German vs Italian,Culture_Closeness_Avg,848.0,0.7715772455144565
+Intra-Paradigm,Paradigm B,German vs Italian,Competence_Overall,651.0,0.11696141208160786
+Intra-Paradigm,Paradigm A,German vs Italian,Culture_Closeness_Avg,778.5,0.7178624331787679
+Intra-Paradigm,Paradigm A,German vs Italian,Competence_Overall,654.5,0.1250018981522736
