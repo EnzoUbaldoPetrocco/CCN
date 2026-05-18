@@ -1,0 +1,20 @@
+One Way ANOVA test, using F distribution df(1,79) (right tailed)
+
+1. H0 hypothesis
+Since p-value > α, H0 is accepted.
+The averages of all groups assumed to be equal.
+In other words, the difference between the sample averages of all groups is not big enough to be statistically significant.
+
+2. P-value
+p-value equals 0.740424, [p( x ≤ F ) = 0.259576 ]. It means that if we would reject H0, the chance of type1 error (rejecting a correct H0) would be too high: 0.7404 (74.04%)
+The bigger the p-value the stronger it supports H0
+
+3. The statistics
+The test statistic F equals 0.110528, which is in the 95% region of acceptance: [0 : 3.9619]
+
+4. Effect size
+The observed effect size f is small (0.037). That indicates that the magnitude of the difference between the averages is small.
+The η2 equals 0.0014. It means that the group explains 0.1% of the variance from the average (similar to R2 in the linear regression)
+
+5. Tukey HSD / Tukey Kramer
+There is no significant difference between the means of any pair.

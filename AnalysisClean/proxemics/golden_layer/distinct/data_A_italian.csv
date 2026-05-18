@@ -1,0 +1,76 @@
+Head orientation ,Head orientation (optionals),Torso orientation ,Torso orientation (optional),Arms/Hands ,Arms/Hands (optionals),Facial affect ,Facial affect (optionals),Proxemics ,Proxemics (optionals),Paradigm,Unnamed: 3,Nationality
+Tracking,,Tracking,,Self-touch,"Crossed, Neutral/Side",Smile,Neutral,Withdrawal signal,,A,,Italian
+Away,Tracking,Neutral,Tracking,Fidgeting,Self-touch,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,Away,Tracking,Neutral,Back,"Crossed, Self-touch",Neutral,Smile,Comfortable,,A,,Italian
+Tracking,Neutral,Neutral,,Crossed,"Self-touch, Neutral/Side",Neutral,"Smile, Frown",Comfortable,Invasion,A,,Italian
+Tracking,"Away, Neutral",Neutral,,Back,,Neutral,Smile,Comfortable,,A,,Italian
+Neutral,Tracking,Neutral,Tracking,Neutral/Side,Back,Neutral,"Smile, Frown",Comfortable,,A,,Italian
+Away,"Tracking, Neutral",Neutral,,Back,"Crossed, Self-touch",Neutral,"Smile, Frown",Comfortable,,A,,Italian
+Tracking,Away,Neutral,Tracking,Crossed,Self-touch,Neutral,Frown,Comfortable,Withdrawal signal,A,,Italian
+Neutral,"Away, Tracking",Tracking,Neutral,Self-touch,"Crossed, Fidgeting, Neutral/Side",Smile,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,Crossed,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Neutral,Tracking,Back,,Smile,Neutral,Comfortable,,A,,Italian
+Away,Neutral,Tracking,Neutral,Crossed,Self-touch,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,Neutral,Tracking,Neutral,Crossed,"Self-touch, Back",Neutral,"Smile, Frown",Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Neutral,Smile,Comfortable,Withdrawal signal,A,,Italian
+Tracking,,Tracking,Neutral,Self-touch,"Crossed, Back, Neutral/Side",Smile,,Comfortable,Withdrawal signal,A,,Italian
+Tracking,Tracking,Neutral,Tracking,Neutral/Side,Self-touch,Neutral,Smile,Comfortable,Withdrawal signal,A,,Italian
+Tracking,,Neutral,,Crossed,Neutral/Side,Smile,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Self-touch,"Fidgeting, Neutral/Side",Smile,,Comfortable,,A,,Italian
+Tracking,,Tracking,,Back,"Crossed, Self-touch",Neutral,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,Back,Neutral,"Smile, Raised brows",Comfortable,,A,,Italian
+Tracking,Away,Neutral,,Back,,Neutral,"Smile, Raised brows",Comfortable,,A,,Italian
+Tracking,,Neutral,,Neutral/Side,,Neutral,"Smile, Raised brows",Comfortable,,A,,Italian
+Tracking,Away,Neutral,,Back,"Crossed, Self-touch",Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Neutral,,Fidgeting,Self-touch,Smile,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,,Smile,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Smile,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Self-touch,Crossed,Smile,Raised brows,Comfortable,,A,,Italian
+Tracking,,Tracking,,Self-touch,Back,Neutral,Frown,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Neutral,Frown,Comfortable,,A,,Italian
+Tracking,,Tracking,,Neutral/Side,"Crossed, Self-touch, Fidgeting",Smile,Raised brows,Comfortable,,A,,Italian
+Tracking,,Neutral,,Neutral/Side,"Crossed, Self-touch",Neutral,Frown,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Neutral,"Smile, Raised brows",Comfortable,,A,,Italian
+Neutral,Tracking,Neutral,Tracking,Back,,Smile,,Comfortable,,A,,Italian
+Tracking,,Tracking,,Crossed,,Smile,Raised brows,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,,Neutral,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Smile,Raised brows,Comfortable,,A,,Italian
+Tracking,,Tracking,,Back,,Neutral,,Comfortable,,A,,Italian
+Tracking,Away,Tracking,,Crossed,"Self-touch, Neutral/Side",Smile,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,"Self-touch, Neutral/Side",Neutral,"Smile, Raised brows",Comfortable,,A,,Italian
+Tracking,,Neutral,,Neutral/Side,Self-touch,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,"Self-touch, Neutral/Side",Smile,Neutral,Comfortable,,A,,Italian
+Tracking,,Neutral,Away,Fidgeting,,Neutral,"Smile, Frown",Comfortable,,A,,Italian
+Tracking,,Neutral,,Neutral/Side,,Smile,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Neutral,"Smile, Raised brows",Comfortable,,A,,Italian
+Neutral,Away,Neutral,,Crossed,,Frown,Smile,Comfortable,,A,,Italian
+Tracking,Neutral,Neutral,,Back,,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Tracking,,Back,,Neutral,Frown,Comfortable,,A,,Italian
+Tracking,"Away, Neutral",Neutral,,Crossed,"Self-touch, Neutral/Side",Neutral,,Comfortable,Withdrawal signal,A,,Italian
+Tracking,,Neutral,,Crossed,Self-touch,Neutral,,Comfortable,,A,,Italian
+Tracking,,Tracking,,Crossed,"Self-touch, Neutral/Side",Neutral,Smile,Comfortable,,A,,Italian
+Neutral,Away,Neutral,,Crossed,,Neutral,,Comfortable,,A,,Italian
+Tracking,Away,Neutral,Tracking,Neutral/Side,,Smile,,Comfortable,,A,,Italian
+Neutral,Tracking,Neutral,,Crossed,"Self-touch, Fidgeting",Neutral,"Smile, Frown",Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Neutral,Raised brows,Comfortable,,A,,Italian
+Tracking,,Neutral,Tracking,Crossed,Self-touch,Smile,Raised brows,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,,Neutral,,Comfortable,,A,,Italian
+Tracking,,Neutral,Tracking,Neutral/Side,,Neutral,Smile,Comfortable,,A,,Italian
+Neutral,Tracking,Neutral,,Crossed,,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Neutral,Tracking,Back,,Neutral,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,Fidgeting,Neutral,,Comfortable,,A,,Italian
+Tracking,,Neutral,Tracking,Back,"Crossed, Self-touch, Fidgeting",Smile,Raised brows,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,Away,Tracking,Neutral,Back,Crossed,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,,Smile,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,,Smile,Frown,Comfortable,,A,,Italian
+Tracking,,Tracking,,Crossed,Fidgeting,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Neutral,,Neutral/Side,,Neutral,,Comfortable,,A,,Italian
+Tracking,,Neutral,,Neutral/Side,,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Neutral,,Comfortable,,A,,Italian
+Tracking,,Tracking,,Neutral/Side,,Neutral,Smile,Comfortable,,A,,Italian
+Tracking,,Tracking,,Self-touch,"Fidgeting, Back, Neutral/Side",Smile,Frown,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,,Smile,Neutral,Comfortable,,A,,Italian
+Tracking,,Neutral,,Back,Crossed,Smile,Neutral,Comfortable,,A,,Italian
+Tracking,,Neutral,,Crossed,,Smile,Raised brows,Comfortable,,A,,Italian

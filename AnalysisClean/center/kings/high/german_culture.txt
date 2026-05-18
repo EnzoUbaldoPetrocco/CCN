@@ -1,0 +1,41 @@
+1. H0 hypothesis
+Since the p-value < α, H0 is rejected.
+Some of the groups' averages consider to be not equal.
+In other words, the sample difference between the averages of some groups is big enough to be statistically significant.
+2. P-value
+The p-value equals 0.003573, ( P(x≤6.0297) = 0.9964 ). It means that the chance of type I error (rejecting a correct H0) is small: 0.003573 (0.36%). The smaller the p-value the more it supports H1.
+
+3. Test statistic
+The test statistic F equals 6.0297, which is not in the 95% region of acceptance: [-∞, 3.1052].
+
+4. Effect size
+The observed effect size η2 is small, 0.02. This indicates that the magnitude of the difference between the averages is small.
+
+The partial effect size ηp2is 0.1255. (treatment effect size)
+
+5. Multiple comparisons
+The mean of the following pair is significantly different: x2-x3.
+
+Outliers
+Outliers' detection method: Tukey Fence, k=1.5.
+The residuals vector contains 4 potential outliers, which is 3.1% of the observations. (-0.227, 0.2433, -0.2567, -0.227).
+The repeated measures ANOVA-test is robust to the presence of outliers.
+The residuals' outliers were calculated from the following data: 0, 0.6666666666666666, 0.5555555555555555, 0.2222222222222222.
+Normality
+The assumption was checked based on the Shapiro-Wilk Test. (α=0.05)
+It is assumed that the residuals do follow the normal distribution (p-value is 0.08082), or more accurately, you can't reject the normality assumption.
+Test power: Treatments
+The test priori power is strong 0.9994
+Sphericity
+Sphericity is the assumption for equality of variances of the differences between the groups.
+Greenhouse-Geisser ε=0.8821, Huynh-Feldt ε=0.9178, Lower-bounde ε=0.5.
+Mauchly's test of sphericity indicated that the assumption of sphericity can not be rejected, hence the assumption had not been violated, χ2(2) = 5.884, p = .053, w = 0.866
+
+
+If you won't correct the significance level (α) and all the comparisons are independent, then the type I error may get to 0.1426. 1 - (1- 0.05)3 = 0.1426.
+This is the worse case, since usually some aspects of the multiple tests are in common, and the type I error will be lower.
+In this case, the Bonferroni correction would be an overcorrection and would reduce the test power.
+The corrected α using the the Bonferroni correction method is 0.01667.
+m - the number of tests / pairs.
+Corrected α = α / m = 0.05 / 3 = 0.01667.
+

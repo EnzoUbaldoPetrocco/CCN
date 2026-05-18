@@ -1,0 +1,54 @@
+Paradigm,Feature,Behavior,Count
+B,Head orientation,Tracking,152
+B,Head orientation,Away,44
+B,Head orientation,Neutral,37
+F,Head orientation,Tracking,156
+F,Head orientation,Away,39
+F,Head orientation,Neutral,38
+A,Head orientation,Tracking,158
+A,Head orientation,Away,35
+A,Head orientation,Neutral,31
+B,Torso orientation,Neutral,124
+B,Torso orientation,Tracking,77
+B,Torso orientation,Away,2
+F,Torso orientation,Neutral,125
+F,Torso orientation,Tracking,74
+F,Torso orientation,Away,1
+A,Torso orientation,Neutral,127
+A,Torso orientation,Tracking,71
+A,Torso orientation,Away,3
+B,Arms/Hands,Neutral/Side,70
+B,Arms/Hands,Self-touch,64
+B,Arms/Hands,Crossed,63
+B,Arms/Hands,Back,49
+B,Arms/Hands,Fidgeting,11
+F,Arms/Hands,Neutral/Side,72
+F,Arms/Hands,Self-touch,64
+F,Arms/Hands,Crossed,60
+F,Arms/Hands,Back,48
+F,Arms/Hands,Fidgeting,8
+A,Arms/Hands,Neutral/Side,72
+A,Arms/Hands,Crossed,62
+A,Arms/Hands,Self-touch,60
+A,Arms/Hands,Back,60
+A,Arms/Hands,Fidgeting,16
+B,Facial affect,Smile,127
+B,Facial affect,Neutral,107
+B,Facial affect,Raised brows,34
+B,Facial affect,Frown,29
+F,Facial affect,Smile,127
+F,Facial affect,Neutral,113
+F,Facial affect,Raised brows,36
+F,Facial affect,Frown,26
+A,Facial affect,Smile,130
+A,Facial affect,Neutral,112
+A,Facial affect,Raised brows,34
+A,Facial affect,Frown,30
+B,Proxemics,Comfortable,159
+B,Proxemics,Withdrawal signal,7
+F,Proxemics,Comfortable,161
+F,Proxemics,Withdrawal signal,10
+F,Proxemics,Invasion,1
+A,Proxemics,Comfortable,159
+A,Proxemics,Withdrawal signal,16
+A,Proxemics,Invasion,1

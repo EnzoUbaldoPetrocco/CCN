@@ -1,0 +1,48 @@
+1. H0 hypothesis
+Since the p-value < α, H0 is rejected.
+Some of the groups' averages consider to be not equal.
+In other words, the sample difference between the averages of some groups is big enough to be statistically significant.
+2. P-value
+The p-value equals 0.00008839, ( P(x≤9.9) = 0.9999 ). It means that the chance of type I error (rejecting a correct H0) is small: 0.00008839 (0.0088%). The smaller the p-value the more it supports H1.
+
+3. Test statistic
+The test statistic F equals 9.9, which is not in the 95% region of acceptance: [-∞, 3.0525].
+
+4. Effect size
+The observed effect size η2 is small, 0.019. This indicates that the magnitude of the difference between the averages is small.
+
+The partial effect size ηp2is 0.1101. (treatment effect size)
+
+5. Multiple comparisons
+The means of the following pairs are significantly different: x1-x2, x2-x3.
+
+Outliers
+Outliers' detection method: Tukey Fence, k=1.5.
+The residuals vector contains 10 potential outliers, which is 4.12% of the observations. (-0.2122, 0.1994, 0.2364, -0.1936, -0.3418, -0.2636, -0.1909, -0.2677, 0.2364, -0.2122).
+The repeated measures ANOVA-test is robust to the presence of outliers.
+The residuals' outliers were calculated from the following data: 0, 0.5555555555555555, 0.6666666666666666, 0.1111111111111111, 0.2222222222222222, 0.5555555555555555, 0.5, 0.3333333333333333, 0.8888888888888888, 0.2222222222222222.
+Normality
+The assumption was checked based on the Shapiro-Wilk Test. (α=0.05)
+It is assumed that the residuals do not follow the normal distribution (p-value is 0.00533).
+The test is considered robust for moderate violation of the normality assumption.
+The sample size is greater than 30, hence if the sample data is reasonably symmetric, the statistic may distribute approximately normally (central limit theorem)
+
+You should check if the sample data is reasonably symmetric around the average.
+If not, you should check the data transformation, e.g. log transformation and square-root transformation.
+If none of the transformations work, you should run a non-parametric test.
+The relevant non-parametric test is the Wilcoxon signed ranks test.
+Test power: Treatments
+The test priori power is strong 1
+Sphericity
+Sphericity is the assumption for equality of variances of the differences between the groups.
+Greenhouse-Geisser ε=0.932, Huynh-Feldt ε=0.9534, Lower-bounde ε=0.5.
+Mauchly's test of sphericity indicated that the assumption of sphericity can not be rejected, hence the assumption had not been violated, χ2(2) = 5.984, p = .050, w = 0.927
+
+
+If you won't correct the significance level (α) and all the comparisons are independent, then the type I error may get to 0.1426. 1 - (1- 0.05)3 = 0.1426.
+This is the worse case, since usually some aspects of the multiple tests are in common, and the type I error will be lower.
+In this case, the Bonferroni correction would be an overcorrection and would reduce the test power.
+The corrected α using the the Bonferroni correction method is 0.01667.
+m - the number of tests / pairs.
+Corrected α = α / m = 0.05 / 3 = 0.01667.
+

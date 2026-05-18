@@ -12,9 +12,14 @@ def extract_features(input_file):
     """
     df = pd.read_csv(input_file)
     
-    # 1. Trust Perception (14-item mean, normalized to 0-1 range)
+    # 1. Define Trust Columns
     trust_cols = [f'Robot_Trust_Q{i}' for i in range(1, 15)]
-    df['Trust_Overall'] = df[trust_cols].mean(axis=1) / 100
+    df_trust_cleaned = df[trust_cols].copy()
+    reverse_items = ['Robot_Trust_Q9', 'Robot_Trust_Q11', 'Robot_Trust_Q14']
+    for col in reverse_items:
+        if col in df_trust_cleaned.columns:
+            df_trust_cleaned[col] = 100 - df_trust_cleaned[col]
+    df['Trust_Overall'] = df_trust_cleaned.mean(axis=1) / 100
 
     # 2. OCEAN Personality Traits (BFI-10 Mapping, normalized to 0-1 range)
     # Formula: (Average - Min_Scale) / (Max_Scale - Min_Scale) -> (mean - 1) / 4
