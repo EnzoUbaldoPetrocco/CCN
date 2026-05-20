@@ -56,7 +56,7 @@ def generate_meaningful_correlations(intro_csv, paradigm_results_csv, output_pat
     # Define variables
     intro_traits = ['Trust_Overall', 'Extraversion', 'Agreeableness', 
                     'Conscientiousness', 'Neuroticism', 'Openness', 'Culture_Affinity']
-    outcomes = ['Culture_Closeness_Avg', 'Competence_Overall']
+    outcomes = ['Culture_Closeness_Avg', 'Competence_Overall', 'all_average']
     
     all_findings = []
 

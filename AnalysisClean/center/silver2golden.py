@@ -14,21 +14,26 @@ def process_interaction_data(input_csv):
     
     # 1. Culture Closeness (1-7 scale)
     culture_cols = ['Culture_Closeness_Q1', 'Culture_Closeness_Q2', 'Culture_Closeness_Q3']
-    df['Culture_Closeness_Avg'] = (df[culture_cols].mean(axis=1) - 1) / 6  # Normalize to 0-1 range
-    
+    for col in culture_cols:
+        df[f'{col}_norm'] = (df[col] - 1) / 6
+    df['Culture_Closeness_Avg'] = df[[f'{col}_norm' for col in culture_cols]].mean(axis=1)
+
     # 2. Competence (1-9 scale normalized to 0-1)
     comp_cols = [f'Competence_Q{i}' for i in range(1, 7)]
     for col in comp_cols:
         df[f'{col}_norm'] = (df[col] - 1) / 8
         
     df['Competence_Overall'] = df[[f'{col}_norm' for col in comp_cols]].mean(axis=1)
+
+    all_cols = culture_cols + comp_cols
+    df['all_average'] = df[['Culture_Closeness_Avg', 'Competence_Overall']].mean(axis=1)
     return df
 
 def run_global_paradigm_comparison(df):
     """
     Pools all nationalities together to compare Paradigms globally.
     """
-    features = ['Culture_Closeness_Avg', 'Competence_Overall']
+    features = ['Culture_Closeness_Avg', 'Competence_Overall', 'all_average']
     results = []
     paradigms = df['Paradigm'].unique()
     
@@ -56,7 +61,6 @@ def export_global_latex(res_df):
     Exports the Global (Mixed Nationality) comparison to a formatted LaTeX table.
     """
     formatted_data = []
-    # Use raw strings for keys to prevent SyntaxWarnings
     col_g1 = r'Group 1 $\mu \pm \sigma$'
     col_g2 = r'Group 2 $\mu \pm \sigma$'
 
@@ -85,11 +89,9 @@ def golden2tables(golden_df: pd.DataFrame):
     Generates a descriptive statistics table (Mean and Std) for every 
     Nationality and Paradigm combination.
     """
-    # Define features to analyze
-    features = ['Culture_Closeness_Avg', 'Competence_Overall']
+    features = ['Culture_Closeness_Avg', 'Competence_Overall', 'all_average']
     df_stats = []
     
-    # Get unique categories
     nationalities = golden_df['Nationality'].unique()
     paradigms = sorted(golden_df['Paradigm'].unique())
 
@@ -106,51 +108,43 @@ def golden2tables(golden_df: pd.DataFrame):
                 for feat in features:
                     mean = p_data[feat].mean()
                     std = p_data[feat].std()
-                    # Store raw values for potential CSV export
+                    
                     row[f'{feat}_Mean'] = mean
                     row[f'{feat}_Std'] = std
-                    # Store formatted LaTeX string
+                    # Replaces underscore with space dynamically
                     row[feat.replace('_', ' ')] = fr"${mean:.3f} \pm {std:.3f}$"
                 
                 df_stats.append(row)
 
-    # Convert to DataFrame
     summary_df = pd.DataFrame(df_stats)
-    
-    # Export to CSV for record keeping
     summary_df.to_csv('golden_layer/descriptive_stats_by_nationality.csv', index=False)
 
-    # Select columns for LaTeX table
-    latex_cols = ['Nationality', 'Paradigm', 'Culture Closeness Avg', 'Competence Overall']
+    # FIXED: 'all_average' changed to 'all average' to match string translation keys
+    latex_cols = ['Nationality', 'Paradigm', 'Culture Closeness Avg', 'Competence Overall', 'all average']
     tex_df = summary_df[latex_cols]
 
     output_path = 'golden_layer/nationality_descriptive_table.tex'
     with open(output_path, 'w') as f:
+        # Adjusted column format to 'llccc' to fit all 5 output columns appropriately
         f.write(tex_df.to_latex(index=False, escape=False, 
-                                 column_format='llcc',
+                                 column_format='llccc',
                                  caption="Descriptive Statistics by Nationality and Paradigm",
                                  label="tab:nat_desc_stats"))
     
     print(f"Success: Descriptive tables generated for {list(nationalities)}")
 
-# Update the main block to call this new function
 if __name__ == "__main__":
     setup_directories()
     input_path = 'silver_layer/experiment2_silver.csv'
     
     if os.path.exists(input_path):
-        # 1. Generate Golden Features
         golden_df = process_interaction_data(input_path)
         golden_df.to_csv('golden_layer/interaction_features_full.csv', index=False)
         
-        # 2. Run Global Analysis (Mixed Nationalities)
         global_stats = run_global_paradigm_comparison(golden_df)
         global_stats.to_csv('golden_layer/global_paradigm_stats.csv', index=False)
         
-        # 3. Export Global LaTeX
         export_global_latex(global_stats)
-        
-        # 4. Generate Nationality-specific descriptive tables
         golden2tables(golden_df)
         
         print("Success: All analysis generated in golden_layer.")

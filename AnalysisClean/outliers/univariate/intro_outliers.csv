@@ -1,0 +1,4 @@
+Nationality,Participant_ID,Trust_Overall,Extraversion,Agreeableness,Conscientiousness,Neuroticism,Openness,Culture_Affinity
+German,75ce6743-7ce3-44de-adfc-a86b0e097dcc,0.75,0.625,0.5,0.625,0.75,0.5,0.2222222222222222
+German,d5f6e081-f5da-4662-8e94-5e78d8faf500,0.5357142857142857,0.625,0.5,0.5,0.5,0.5,0.1666666666666666
+German,4db961c3-1479-418f-a6bc-970fd0316cad,0.6857142857142857,0.5,0.5,0.875,0.5,0.5,0.2222222222222222
